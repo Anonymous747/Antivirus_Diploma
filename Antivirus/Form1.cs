@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntivirusML.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,18 @@ namespace Antivirus
         public Form1()
         {
             InitializeComponent();
+
+            // Add input data
+            var input = new ModelInput();
+
+            // Load model and predict output of sample data
+            ModelOutput result = ConsumeModel.Predict(input);
+            Console.WriteLine();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

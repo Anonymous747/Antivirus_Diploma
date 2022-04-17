@@ -1,0 +1,11 @@
+A:\Diploma\AntivirusML.Model\bin\Debug\netstandard2.0\MLModel.zip
+A:\Diploma\AntivirusML.Model\bin\Debug\netstandard2.0\AntivirusML.Model.deps.json
+A:\Diploma\AntivirusML.Model\bin\Debug\netstandard2.0\AntivirusML.Model.dll
+A:\Diploma\AntivirusML.Model\bin\Debug\netstandard2.0\AntivirusML.Model.pdb
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.csproj.AssemblyReference.cache
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.GeneratedMSBuildEditorConfig.editorconfig
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.AssemblyInfoInputs.cache
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.AssemblyInfo.cs
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.csproj.CoreCompileInputs.cache
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.dll
+A:\Diploma\AntivirusML.Model\obj\Debug\netstandard2.0\AntivirusML.Model.pdb
