@@ -568,7 +568,7 @@ namespace Antivirus.Repository
         public PeFileModel ToModel()
         {
             return new PeFileModel(
-                    0, // Name
+                    "Name", // Name
                     "", // md5
                     fileHeader.Machine,
                     fileHeader.SizeOfOptionalHeader,

@@ -23,15 +23,6 @@ namespace Antivirus.UserControls
         public FileScanningControl()
         {
             InitializeComponent();
-
-            // Add input data
-            var input = new ModelInput();
-
-
-
-            // Load model and predict output of sample data
-            ModelOutput result = ConsumeModel.Predict(input);
-            Console.WriteLine();
         }
 
         private void FileScanningControl_Load(object sender, EventArgs e)
@@ -173,7 +164,12 @@ namespace Antivirus.UserControls
                     var model = reader.ToModel();
                     Console.WriteLine(reader);
 
-                   
+                    var input = new ModelInput();
+                    model.FillInputModel(ref input);
+
+                    ModelOutput result = ConsumeModel.Predict(input);
+                    Console.WriteLine();
+
                     // if (reader.Is32BitHeader)
                     // {
                     //    PeHeaderReader.IMAGE_OPTIONAL_HEADER64 header64 = reader.OptionalHeader64;

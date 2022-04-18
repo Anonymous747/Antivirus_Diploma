@@ -233,6 +233,5 @@ namespace AntivirusML.Model
         [ColumnName("legitimate"), LoadColumn(56)]
         public string Legitimate { get; set; }
 
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Antivirus.Repository;
+using AntivirusML.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Antivirus.Model
 {
     public struct PeFileModel
     {
-        public PeFileModel(int name, string md5, ushort machine, ushort sizeOfOptionalHeader, ushort characteristics, byte majorLinkerVersion, byte minorLinkerVersion, uint sizeOfCode, uint sizeOfInitializedData, uint sizeOfUninitializedData, uint addressOfEntryPoint, uint baseOfCode, uint baseOfData, ulong imageBase, uint sectionAlignment, uint fileAlignment, ushort majorOperatingSystemVersion, ushort minorOperatingSystemVersion, ushort majorImageVersion, ushort minorImageVersion, ushort majorSubsystemVersion, ushort minorSubsystemVersion, uint sizeOfImage, uint sizeOfHeaders, uint checkSum, ushort subsystem, ushort dllCharacteristics, ulong sizeOfStackReserve, ulong sizeOfStackCommit, ulong sizeOfHeapReserve, ulong sizeOfHeapCommit, uint loaderFlags, uint numberOfRvaAndSizes, int sectionsNb, double sectionsMeanEntropy, double sectionsMinEntropy, double sectionsMaxEntropy, int sectionsMeanRawsize, double sectionsMinRawsize, double sectionMaxRawsize, int sectionsMeanVirtualsize, int sectionsMinVirtualsize, int importsNbDLL, int importsNb, int importsNbOrdinal, int exportNb, int resourcesNb, double resourcesMeanEntropy, double resourcesMinEntropy, double resourcesMaxEntropy, double resourcesMeanSize, int resourcesMinSize, int resourcesMaxSize, int loadConfigurationSize, int versionInformationSize)
+        public PeFileModel(string name, string md5, ushort machine, ushort sizeOfOptionalHeader, ushort characteristics, byte majorLinkerVersion, byte minorLinkerVersion, uint sizeOfCode, uint sizeOfInitializedData, uint sizeOfUninitializedData, uint addressOfEntryPoint, uint baseOfCode, uint baseOfData, ulong imageBase, uint sectionAlignment, uint fileAlignment, ushort majorOperatingSystemVersion, ushort minorOperatingSystemVersion, ushort majorImageVersion, ushort minorImageVersion, ushort majorSubsystemVersion, ushort minorSubsystemVersion, uint sizeOfImage, uint sizeOfHeaders, uint checkSum, ushort subsystem, ushort dllCharacteristics, ulong sizeOfStackReserve, ulong sizeOfStackCommit, ulong sizeOfHeapReserve, ulong sizeOfHeapCommit, uint loaderFlags, uint numberOfRvaAndSizes, int sectionsNb, double sectionsMeanEntropy, double sectionsMinEntropy, double sectionsMaxEntropy, int sectionsMeanRawsize, double sectionsMinRawsize, double sectionMaxRawsize, int sectionsMeanVirtualsize, int sectionsMinVirtualsize, int importsNbDLL, int importsNb, int importsNbOrdinal, int exportNb, int resourcesNb, double resourcesMeanEntropy, double resourcesMinEntropy, double resourcesMaxEntropy, double resourcesMeanSize, int resourcesMinSize, int resourcesMaxSize, int loadConfigurationSize, int versionInformationSize)
         {
             Name = name;
             Md5 = md5;
@@ -68,7 +69,7 @@ namespace Antivirus.Model
             VersionInformationSize = versionInformationSize;
         }
 
-        public int Name { get; set; }
+        public string Name { get; set; }
         public string Md5 { get; set; }
         public UInt16 Machine { get; set; }
         public UInt16 SizeOfOptionalHeader { get; set; }
@@ -124,6 +125,54 @@ namespace Antivirus.Model
         public int LoadConfigurationSize { get; set; }
         public int VersionInformationSize { get; set; }
 
-       
+        public void FillInputModel(ref ModelInput model)
+        {
+            model.AddressOfEntryPoint = AddressOfEntryPoint;
+            model.BaseOfCode = BaseOfCode;
+            model.BaseOfData = BaseOfData;
+            model.Characteristics = Characteristics;
+            model.CheckSum = CheckSum;
+            model.DllCharacteristics = DllCharacteristics;
+            model.ExportNb = ExportNb;
+            model.FileAlignment = FileAlignment;
+            model.ImageBase = ImageBase;
+            model.ImportsNb = ImportsNb;
+            model.ImportsNbDLL = ImportsNbDLL;
+            model.ImportsNbOrdinal = ImportsNbOrdinal;
+            model.LoadConfigurationSize = LoadConfigurationSize;
+            model.LoaderFlags = LoaderFlags;
+            model.Machine = Machine;
+            model.Md5 = Md5;
+            model.Name = Name;
+            model.MajorImageVersion = MajorImageVersion;
+            model.MajorLinkerVersion = MajorLinkerVersion;
+            model.MajorOperatingSystemVersion = MajorOperatingSystemVersion;
+            model.MajorSubsystemVersion = MajorSubsystemVersion;
+            model.MinorImageVersion = MinorImageVersion;
+            model.MinorLinkerVersion = MinorLinkerVersion;
+            model.MinorOperatingSystemVersion = MinorOperatingSystemVersion;
+            model.MinorSubsystemVersion = MinorSubsystemVersion;
+            model.NumberOfRvaAndSizes = NumberOfRvaAndSizes;
+            model.ResourcesMaxSize = ResourcesMaxSize; // ResourcesMaxEntropy ResourcesMinEntropy
+            model.ResourcesMinSize = ResourcesMinSize; // ResourcesMeanEntropy;  ResourcesMeanSize
+            model.ResourcesNb = ResourcesNb;
+            model.SectionAlignment = SectionAlignment; // SectionsMaxEntropy SectionsMeanEntropy
+            model.SectionsMeanRawsize = SectionsMeanRawsize; // SectionMaxRawsize; SectionMaxVirtualsize
+            model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
+            model.SectionsMinVirtualsize = SectionsMinVirtualsize; // SectionsMinEntropy SectionsMinRawsize
+            model.SectionsNb = SectionsNb;
+            model.SizeOfCode = SizeOfCode;
+            model.SizeOfHeaders = SizeOfHeaders;
+            model.SizeOfHeapCommit = SizeOfHeapCommit;
+            model.SizeOfHeapReserve = SizeOfHeapReserve;
+            model.SizeOfImage = SizeOfImage;
+            model.SizeOfInitializedData = SizeOfInitializedData;
+            model.SizeOfOptionalHeader = SizeOfOptionalHeader;
+            model.SizeOfStackCommit = SizeOfStackCommit;
+            model.SizeOfStackReserve = SizeOfStackReserve;
+            model.SizeOfUninitializedData = SizeOfUninitializedData;
+            model.Subsystem = Subsystem;
+            model.VersionInformationSize = VersionInformationSize;
+        }
     }
 }
