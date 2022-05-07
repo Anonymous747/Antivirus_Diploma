@@ -1,5 +1,6 @@
 ﻿using Antivirus.Repository;
 using AntivirusML.Model;
+using MLModelAntivirus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -153,13 +154,140 @@ namespace Antivirus.Model
             model.MinorOperatingSystemVersion = MinorOperatingSystemVersion;
             model.MinorSubsystemVersion = MinorSubsystemVersion;
             model.NumberOfRvaAndSizes = NumberOfRvaAndSizes;
-            model.ResourcesMaxSize = ResourcesMaxSize; // ResourcesMaxEntropy ResourcesMinEntropy
-            model.ResourcesMinSize = ResourcesMinSize; // ResourcesMeanEntropy;  ResourcesMeanSize
+            model.ResourcesMaxSize = ResourcesMaxSize;
+            model.ResourcesMaxEntropy = (float)ResourcesMaxEntropy;
+            model.ResourcesMinEntropy = (float)ResourcesMinEntropy; 
+            model.ResourcesMinSize = ResourcesMinSize;
+            model.ResourcesMeanEntropy = (float)ResourcesMeanEntropy;
+            model.ResourcesMeanSize = (float)ResourcesMeanSize;
             model.ResourcesNb = ResourcesNb;
-            model.SectionAlignment = SectionAlignment; // SectionsMaxEntropy SectionsMeanEntropy
-            model.SectionsMeanRawsize = SectionsMeanRawsize; // SectionMaxRawsize; SectionMaxVirtualsize
+            model.SectionAlignment = SectionAlignment;
+            model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
+            model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
+            model.SectionsMeanRawsize = SectionsMeanRawsize;
+            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
             model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
-            model.SectionsMinVirtualsize = SectionsMinVirtualsize; // SectionsMinEntropy SectionsMinRawsize
+            model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionsMinEntropy = (float)SectionsMinEntropy;
+            model.SectionsMinRawsize = (float)SectionsMinRawsize;
+            model.SectionsNb = SectionsNb;
+            model.SizeOfCode = SizeOfCode;
+            model.SizeOfHeaders = SizeOfHeaders;
+            model.SizeOfHeapCommit = SizeOfHeapCommit;
+            model.SizeOfHeapReserve = SizeOfHeapReserve;
+            model.SizeOfImage = SizeOfImage;
+            model.SizeOfInitializedData = SizeOfInitializedData;
+            model.SizeOfOptionalHeader = SizeOfOptionalHeader;
+            model.SizeOfStackCommit = SizeOfStackCommit;
+            model.SizeOfStackReserve = SizeOfStackReserve;
+            model.SizeOfUninitializedData = SizeOfUninitializedData;
+            model.Subsystem = Subsystem;
+            model.VersionInformationSize = VersionInformationSize;
+        }
+
+        public void FillMLModel1Input(ref MLModel1.ModelInput model)
+        {
+            model.AddressOfEntryPoint = AddressOfEntryPoint;
+            model.BaseOfCode = BaseOfCode;
+            model.BaseOfData = BaseOfData;
+            model.Characteristics = Characteristics;
+            model.CheckSum = CheckSum;
+            model.DllCharacteristics = DllCharacteristics;
+            model.ExportNb = ExportNb;
+            model.FileAlignment = FileAlignment;
+            model.ImageBase = ImageBase;
+            model.ImportsNb = ImportsNb;
+            model.ImportsNbDLL = ImportsNbDLL;
+            model.ImportsNbOrdinal = ImportsNbOrdinal;
+            model.LoadConfigurationSize = LoadConfigurationSize;
+            model.LoaderFlags = LoaderFlags;
+            model.Machine = Machine;
+            model.Md5 = Md5;
+            model.Name = Name;
+            model.MajorImageVersion = MajorImageVersion;
+            model.MajorLinkerVersion = MajorLinkerVersion;
+            model.MajorOperatingSystemVersion = MajorOperatingSystemVersion;
+            model.MajorSubsystemVersion = MajorSubsystemVersion;
+            model.MinorImageVersion = MinorImageVersion;
+            model.MinorLinkerVersion = MinorLinkerVersion;
+            model.MinorOperatingSystemVersion = MinorOperatingSystemVersion;
+            model.MinorSubsystemVersion = MinorSubsystemVersion;
+            model.NumberOfRvaAndSizes = NumberOfRvaAndSizes;
+            model.ResourcesMaxSize = ResourcesMaxSize;
+            model.ResourcesMaxEntropy = (float)ResourcesMaxEntropy;
+            model.ResourcesMinEntropy = (float)ResourcesMinEntropy;
+            model.ResourcesMinSize = ResourcesMinSize;
+            model.ResourcesMeanEntropy = (float)ResourcesMeanEntropy;
+            model.ResourcesMeanSize = (float)ResourcesMeanSize;
+            model.ResourcesNb = ResourcesNb;
+            model.SectionAlignment = SectionAlignment;
+            model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
+            model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
+            model.SectionsMeanRawsize = SectionsMeanRawsize;
+            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
+            model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
+            model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionsMinEntropy = (float)SectionsMinEntropy;
+            model.SectionsMinRawsize = (float)SectionsMinRawsize;
+            model.SectionsNb = SectionsNb;
+            model.SizeOfCode = SizeOfCode;
+            model.SizeOfHeaders = SizeOfHeaders;
+            model.SizeOfHeapCommit = SizeOfHeapCommit;
+            model.SizeOfHeapReserve = SizeOfHeapReserve;
+            model.SizeOfImage = SizeOfImage;
+            model.SizeOfInitializedData = SizeOfInitializedData;
+            model.SizeOfOptionalHeader = SizeOfOptionalHeader;
+            model.SizeOfStackCommit = SizeOfStackCommit;
+            model.SizeOfStackReserve = SizeOfStackReserve;
+            model.SizeOfUninitializedData = SizeOfUninitializedData;
+            model.Subsystem = Subsystem;
+            model.VersionInformationSize = VersionInformationSize;
+        }
+
+        public void FillFullCheckMLModelInput(ref FullAntivirusCheck.ModelInput model)
+        {
+            model.AddressOfEntryPoint = AddressOfEntryPoint;
+            model.BaseOfCode = BaseOfCode;
+            model.BaseOfData = BaseOfData;
+            model.Characteristics = Characteristics;
+            model.CheckSum = CheckSum;
+            model.DllCharacteristics = DllCharacteristics;
+            model.ExportNb = ExportNb;
+            model.FileAlignment = FileAlignment;
+            model.ImageBase = ImageBase;
+            model.ImportsNb = ImportsNb;
+            model.ImportsNbDLL = ImportsNbDLL;
+            model.ImportsNbOrdinal = ImportsNbOrdinal;
+            model.LoadConfigurationSize = LoadConfigurationSize;
+            model.LoaderFlags = LoaderFlags;
+            model.Machine = Machine;
+            model.Md5 = Md5;
+            model.Name = Name;
+            model.MajorImageVersion = MajorImageVersion;
+            model.MajorLinkerVersion = MajorLinkerVersion;
+            model.MajorOperatingSystemVersion = MajorOperatingSystemVersion;
+            model.MajorSubsystemVersion = MajorSubsystemVersion;
+            model.MinorImageVersion = MinorImageVersion;
+            model.MinorLinkerVersion = MinorLinkerVersion;
+            model.MinorOperatingSystemVersion = MinorOperatingSystemVersion;
+            model.MinorSubsystemVersion = MinorSubsystemVersion;
+            model.NumberOfRvaAndSizes = NumberOfRvaAndSizes;
+            model.ResourcesMaxSize = ResourcesMaxSize;
+            model.ResourcesMaxEntropy = (float)ResourcesMaxEntropy;
+            model.ResourcesMinEntropy = (float)ResourcesMinEntropy;
+            model.ResourcesMinSize = ResourcesMinSize;
+            model.ResourcesMeanEntropy = (float)ResourcesMeanEntropy;
+            model.ResourcesMeanSize = (float)ResourcesMeanSize;
+            model.ResourcesNb = ResourcesNb;
+            model.SectionAlignment = SectionAlignment;
+            model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
+            model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
+            model.SectionsMeanRawsize = SectionsMeanRawsize;
+            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
+            model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
+            model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionsMinEntropy = (float)SectionsMinEntropy;
+            model.SectionsMinRawsize = (float)SectionsMinRawsize;
             model.SectionsNb = SectionsNb;
             model.SizeOfCode = SizeOfCode;
             model.SizeOfHeaders = SizeOfHeaders;

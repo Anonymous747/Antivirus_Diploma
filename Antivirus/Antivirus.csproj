@@ -1,13 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="1.7.0" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AntivirusML.Model\AntivirusML.Model.csproj" />
+    <ProjectReference Include="..\FullAntivirusCheck\FullAntivirusCheck.csproj" />
+    <ProjectReference Include="..\MLModelAntivirus\MLModelAntivirus.csproj" />
   </ItemGroup>
-
+  <ItemGroup Label="FullAntivirusCheck">
+    <None Include="FullAntivirusCheck.consumption.cs">
+      <DependentUpon>FullAntivirusCheck.mbconfig</DependentUpon>
+    </None>
+    <None Include="FullAntivirusCheck.training.cs">
+      <DependentUpon>FullAntivirusCheck.mbconfig</DependentUpon>
+    </None>
+    <None Include="FullAntivirusCheck.zip">
+      <DependentUpon>FullAntivirusCheck.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

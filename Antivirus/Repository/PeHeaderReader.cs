@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
 using Antivirus.Model;
+using System.Text;
+using System.Diagnostics;
 
 namespace Antivirus.Repository
 {
@@ -416,9 +418,12 @@ namespace Antivirus.Repository
 
                 // Add 4 bytes to the offset
                 stream.Seek(dosHeader.e_lfanew, SeekOrigin.Begin);
-
+                
                 UInt32 ntHeadersSignature = reader.ReadUInt32();
+
                 fileHeader = FromBinaryReader<IMAGE_FILE_HEADER>(reader);
+                var a = Encoding.ASCII.GetString(BitConverter.GetBytes(fileHeader.Machine));
+                Console.WriteLine(a);
                 if (this.Is32BitHeader)
                 {
                     optionalHeader32 = FromBinaryReader<IMAGE_OPTIONAL_HEADER32>(reader);
@@ -567,34 +572,102 @@ namespace Antivirus.Repository
 
         public PeFileModel ToModel()
         {
+            return this.Is32BitHeader ? Create32PeFileModel() : Create64PeFileModel();
+        }
+
+        public PeFileModel Create32PeFileModel()
+        {
             return new PeFileModel(
-                    "Name", // Name
+                "Name", // Name
+                    "", // md5
+                    fileHeader.Machine,
+                    fileHeader.SizeOfOptionalHeader,
+                    fileHeader.Characteristics,
+                    optionalHeader32.MajorLinkerVersion,
+                    optionalHeader32.MinorLinkerVersion,
+                     optionalHeader32.SizeOfCode,
+                    optionalHeader32.SizeOfInitializedData,
+                    optionalHeader32.SizeOfUninitializedData,
+                    optionalHeader32.AddressOfEntryPoint,
+                    optionalHeader32.BaseOfCode,
+                    optionalHeader32.BaseOfData,
+                    optionalHeader32.ImageBase,
+                    optionalHeader32.SectionAlignment,
+                    optionalHeader32.FileAlignment,
+                    optionalHeader32.MajorOperatingSystemVersion,
+                    optionalHeader32.MajorImageVersion,
+                    optionalHeader32.MinorImageVersion,
+                    optionalHeader32.MajorSubsystemVersion,
+                    optionalHeader32.MinorOperatingSystemVersion,
+                    optionalHeader32.MinorSubsystemVersion,
+                    0, //optionalHeader32.SizeOfImage,
+                    optionalHeader32.SizeOfHeaders,
+                    optionalHeader32.CheckSum,
+                    optionalHeader32.Subsystem,
+                    optionalHeader32.DllCharacteristics,
+                    0, //optionalHeader32.SizeOfStackReserve,
+                    optionalHeader32.SizeOfStackCommit,
+                    optionalHeader32.SizeOfHeapReserve,
+                    optionalHeader32.SizeOfHeapCommit,
+                    optionalHeader32.LoaderFlags,
+                    optionalHeader32.NumberOfRvaAndSizes,
+                    0, // SectionsNb
+                    0, // SectionMeanEntropy
+                    0, // SectionsMinEntropy
+                    0, // SectionsMaxEntropy 
+                    0, // SectionsMeanRawsize 
+                    0, // SectionsMinRawsize 
+                    0, // SectionMaxRawsize 
+                    0, // SectionsMeanVirtualsize
+                    0, // SectionsMinVirtualsize 
+                    0, // ImportsNbDLL
+                    0, // ImportsNb
+                    0, // ImportsNbOrdinal
+                    0, // ExportNb
+                    0, // ResourcesNb
+                    0, // ResourcesMeanEntropy
+                    0, // ResourcesMinEntropy
+                    0, // ResourcesMaxEntropy
+                    0, // ResourcesMeanSize
+                    0, // ResourcesMeanSize
+                    0, // ResourcesMaxSize
+                    0, // LoadConfigurationSize
+                    0  //  VersionInformationSize
+                
+                );
+        }
+
+        public PeFileModel Create64PeFileModel()
+        {
+            return new PeFileModel(
+                "Name", // Name
                     "", // md5
                     fileHeader.Machine,
                     fileHeader.SizeOfOptionalHeader,
                     fileHeader.Characteristics,
                     optionalHeader64.MajorLinkerVersion,
                     optionalHeader64.MinorLinkerVersion,
-                    optionalHeader64.SizeOfCode,
+                     optionalHeader64.SizeOfCode,
                     optionalHeader64.SizeOfInitializedData,
+                    optionalHeader64.SizeOfUninitializedData,
                     optionalHeader64.AddressOfEntryPoint,
                     optionalHeader64.BaseOfCode,
                     optionalHeader32.BaseOfData,
-                    0, //optionalHeader64.ImageBase,
+                    optionalHeader64.ImageBase,
                     optionalHeader64.SectionAlignment,
                     optionalHeader64.FileAlignment,
-                    optionalHeader64.MajorOperatingSystemVersion,
+                    optionalHeader64.MinorOperatingSystemVersion,
                     optionalHeader64.MinorOperatingSystemVersion,
                     optionalHeader64.MajorImageVersion,
                     optionalHeader64.MinorImageVersion,
                     optionalHeader64.MajorSubsystemVersion,
                     optionalHeader64.MinorSubsystemVersion,
-                    0, //optionalHeader64.SizeOfImage,
+                    optionalHeader64.SizeOfImage,
                     optionalHeader64.SizeOfHeaders,
                     optionalHeader64.CheckSum,
                     optionalHeader64.Subsystem,
                     optionalHeader64.DllCharacteristics,
-                    0, //optionalHeader64.SizeOfStackReserve,
+                    optionalHeader64.SizeOfStackReserve,
                     optionalHeader64.SizeOfStackCommit,
                     optionalHeader64.SizeOfHeapReserve,
                     optionalHeader64.SizeOfHeapCommit,
@@ -618,15 +691,16 @@ namespace Antivirus.Repository
                     0, // ResourcesMinEntropy
                     0, // ResourcesMaxEntropy
                     0, // ResourcesMeanSize
-                    0,
                     0, // ResourcesMeanSize
                     0, // ResourcesMaxSize
                     0, // LoadConfigurationSize
                     0  //  VersionInformationSize
                 );
         }
-        
+
         #endregion
+
+
     }
 }
 

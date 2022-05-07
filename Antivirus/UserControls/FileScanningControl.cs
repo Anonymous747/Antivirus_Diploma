@@ -10,6 +10,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using AntivirusML.Model;
+using MLModelAntivirus;
+using FullAntivirusCheck;
 
 namespace Antivirus.UserControls
 {
@@ -152,7 +154,6 @@ namespace Antivirus.UserControls
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = true;
-            ofd.Filter = "Textfilews | *.txt";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 filePaths = ofd.FileNames;
@@ -170,6 +171,13 @@ namespace Antivirus.UserControls
                     ModelOutput result = ConsumeModel.Predict(input);
                     Console.WriteLine();
 
+                  /*  FullAntivirusCheck.ModelInput sampleData = new FullAntivirusCheck.ModelInput();
+                    PeHeaderReader reader = new PeHeaderReader(fileName);
+                    var model = reader.ToModel();
+                    model.FillFullCheckMLModelInput(ref sampleData);*/
+
+                    /*var predictionResult = FullAntivirusCheck.Predict(sampleData);
+                    Console.WriteLine(predictionResult.Legitimate);*/
                     // if (reader.Is32BitHeader)
                     // {
                     //    PeHeaderReader.IMAGE_OPTIONAL_HEADER64 header64 = reader.OptionalHeader64;
