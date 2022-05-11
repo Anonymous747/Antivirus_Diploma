@@ -5,6 +5,8 @@ using System.IO;
 using Antivirus.Model;
 using System.Text;
 using System.Diagnostics;
+using Antivirus.Source;
+using System.Linq;
 
 namespace Antivirus.Repository
 {
@@ -173,6 +175,14 @@ namespace Antivirus.Repository
             public UInt16 Characteristics;
         }
 
+        [StructLayout(LayoutKind.Explicit)]
+        public struct IMAGE_DATA_SIGNATURE
+        {
+            [FieldOffset(0)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+            public char[] Signature;
+        }
+
         // Grabbed the following 2 definitions from http://www.pinvoke.net/default.aspx/Structures/IMAGE_SECTION_HEADER.html
 
         [StructLayout(LayoutKind.Explicit)]
@@ -204,6 +214,12 @@ namespace Antivirus.Repository
             {
                 get { return new string(Name); }
             }
+        }
+
+        public struct EXTENDED_IMAGE_SECTION_HEADER
+        {
+            public IMAGE_SECTION_HEADER sectionHeader;
+            public float entropy;
         }
 
         [Flags]
@@ -384,6 +400,10 @@ namespace Antivirus.Repository
         #region Private Fields
 
         /// <summary>
+        /// The file signature
+        /// </summary>
+        private IMAGE_DATA_SIGNATURE signature;
+        /// <summary>
         /// The DOS header
         /// </summary>
         private IMAGE_DOS_HEADER dosHeader;
@@ -402,28 +422,39 @@ namespace Antivirus.Repository
         /// <summary>
         /// Image Section headers. Number of sections is in the file header.
         /// </summary>
-        private IMAGE_SECTION_HEADER[] imageSectionHeaders;
+        private IMAGE_SECTION_HEADER imageSectionHeader;
+
+        private EXTENDED_IMAGE_SECTION_HEADER[] extendedImageSectionHeaders;
+
+        private String fileName;
+
+        private String filePath;
 
         #endregion Private Fields
 
         #region Public Methods
 
-        public PeHeaderReader(string filePath)
+        public PeHeaderReader(string fullFilePath)
         {
+            this.filePath = fullFilePath;
+            this.fileName = filePath.GetFileName();
+
             // Read in the DLL or EXE and get the timestamp
             using (FileStream stream = new FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
             {
                 BinaryReader reader = new BinaryReader(stream);
-                dosHeader = FromBinaryReader<IMAGE_DOS_HEADER>(reader);
+                var entropy = GetReaderBytes(reader).GetEntropy();
+                
+                stream.Seek(0, SeekOrigin.Begin);
 
+                dosHeader = FromBinaryReader<IMAGE_DOS_HEADER>(reader);
+               
                 // Add 4 bytes to the offset
                 stream.Seek(dosHeader.e_lfanew, SeekOrigin.Begin);
-                
-                UInt32 ntHeadersSignature = reader.ReadUInt32();
 
+                signature = FromBinaryReader<IMAGE_DATA_SIGNATURE>(reader);
                 fileHeader = FromBinaryReader<IMAGE_FILE_HEADER>(reader);
-                var a = Encoding.ASCII.GetString(BitConverter.GetBytes(fileHeader.Machine));
-                Console.WriteLine(a);
+                
                 if (this.Is32BitHeader)
                 {
                     optionalHeader32 = FromBinaryReader<IMAGE_OPTIONAL_HEADER32>(reader);
@@ -433,10 +464,15 @@ namespace Antivirus.Repository
                     optionalHeader64 = FromBinaryReader<IMAGE_OPTIONAL_HEADER64>(reader);
                 }
 
-                imageSectionHeaders = new IMAGE_SECTION_HEADER[fileHeader.NumberOfSections];
-                for (int headerNo = 0; headerNo < imageSectionHeaders.Length; ++headerNo)
+                extendedImageSectionHeaders = new EXTENDED_IMAGE_SECTION_HEADER [fileHeader.NumberOfSections];
+                for (int headerNo = 0; headerNo < extendedImageSectionHeaders.Length; ++headerNo)
                 {
-                    imageSectionHeaders[headerNo] = FromBinaryReader<IMAGE_SECTION_HEADER>(reader);
+                    byte[] bytes = GetBinaryReaderBytes<IMAGE_SECTION_HEADER>(reader);//FromBinaryReader<IMAGE_SECTION_HEADER>(reader);
+                    var sectionEntropy = bytes.GetEntropy();
+                    IMAGE_SECTION_HEADER sectionHeader = FromBytesToModel<IMAGE_SECTION_HEADER>(bytes);
+
+                    extendedImageSectionHeaders[headerNo].sectionHeader = sectionHeader;
+                    extendedImageSectionHeaders[headerNo].entropy = sectionEntropy;
                 }
 
             }
@@ -490,6 +526,39 @@ namespace Antivirus.Repository
             return theStructure;
         }
 
+        public static byte[] GetBinaryReaderBytes<T>(BinaryReader reader)
+        {
+            // Read in a byte array
+            return reader.ReadBytes(Marshal.SizeOf(typeof(T)));
+        }
+
+        public static T FromBytesToModel<T>(byte[] bytes)
+        {
+            GCHandle handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
+            T theStructure = (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
+            handle.Free();
+
+            return theStructure;
+        }
+
+        private const int READ_BUFFER_SIZE = 1024; 
+
+        public static byte[] GetReaderBytes(BinaryReader reader)
+        {
+            int byteRead = 0;
+            int byteTransfered = 0;
+            byte[] fileBytes = new byte[0];
+            do
+            {
+                byte[] buffer = reader.ReadBytes(READ_BUFFER_SIZE);
+                byteRead = buffer.Length;
+                byteTransfered += byteRead;
+                fileBytes = fileBytes.Concat(buffer).ToArray();
+            } while (byteRead == READ_BUFFER_SIZE);
+
+            return fileBytes;
+        }
+
         #endregion Public Methods
 
         #region Properties
@@ -539,11 +608,19 @@ namespace Antivirus.Repository
             }
         }
 
-        public IMAGE_SECTION_HEADER[] ImageSectionHeaders
+        public IMAGE_SECTION_HEADER ImageSectionHeader
         {
             get
             {
-                return imageSectionHeaders;
+                return imageSectionHeader;
+            }
+        }
+
+        public EXTENDED_IMAGE_SECTION_HEADER[] ExtendedImageSectionHeaders
+        {
+            get
+            {
+                return extendedImageSectionHeaders;
             }
         }
 
@@ -570,7 +647,7 @@ namespace Antivirus.Repository
 
         #region Reduction
 
-        public PeFileModel ToModel()
+        public PeFileModel ToModel(String name)
         {
             return this.Is32BitHeader ? Create32PeFileModel() : Create64PeFileModel();
         }
@@ -578,7 +655,7 @@ namespace Antivirus.Repository
         public PeFileModel Create32PeFileModel()
         {
             return new PeFileModel(
-                "Name", // Name
+                fileName, // Name
                     "", // md5
                     fileHeader.Machine,
                     fileHeader.SizeOfOptionalHeader,
@@ -600,18 +677,18 @@ namespace Antivirus.Repository
                     optionalHeader32.MajorSubsystemVersion,
                     optionalHeader32.MinorOperatingSystemVersion,
                     optionalHeader32.MinorSubsystemVersion,
-                    0, //optionalHeader32.SizeOfImage,
+                   optionalHeader32.SizeOfImage,
                     optionalHeader32.SizeOfHeaders,
                     optionalHeader32.CheckSum,
                     optionalHeader32.Subsystem,
                     optionalHeader32.DllCharacteristics,
-                    0, //optionalHeader32.SizeOfStackReserve,
+                    optionalHeader32.SizeOfStackReserve,
                     optionalHeader32.SizeOfStackCommit,
                     optionalHeader32.SizeOfHeapReserve,
                     optionalHeader32.SizeOfHeapCommit,
                     optionalHeader32.LoaderFlags,
                     optionalHeader32.NumberOfRvaAndSizes,
-                    0, // SectionsNb
+                    extendedImageSectionHeaders.Length, // SectionsNb
                     0, // SectionMeanEntropy
                     0, // SectionsMinEntropy
                     0, // SectionsMaxEntropy 
@@ -640,7 +717,7 @@ namespace Antivirus.Repository
         public PeFileModel Create64PeFileModel()
         {
             return new PeFileModel(
-                "Name", // Name
+                fileName, // Name
                     "", // md5
                     fileHeader.Machine,
                     fileHeader.SizeOfOptionalHeader,
@@ -673,7 +750,7 @@ namespace Antivirus.Repository
                     optionalHeader64.SizeOfHeapCommit,
                     optionalHeader64.LoaderFlags,
                     optionalHeader64.NumberOfRvaAndSizes,
-                    0, // SectionsNb
+                    extendedImageSectionHeaders.Length, // SectionsNb
                     0, // SectionMeanEntropy
                     0, // SectionsMinEntropy
                     0, // SectionsMaxEntropy 

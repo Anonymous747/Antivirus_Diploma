@@ -63,7 +63,9 @@ namespace Antivirus.UserControls
                     threatsGridView[1, k].Value = DateTime.Now;
                     // Set threat category
                     threatsGridView[2, k].Value = "Trojan";
+
                     k++;
+                    
                     lblStatus.Text = Constants.kInfectedString;
                     lblStatus.ForeColor = Color.Red;
                 }
@@ -158,12 +160,12 @@ namespace Antivirus.UserControls
             {
                 filePaths = ofd.FileNames;
 
-                foreach (var fileName in filePaths)
+                foreach (var filePath in filePaths)
                 {
-                    listBox1.Items.Add(fileName);
-                    PeHeaderReader reader = new PeHeaderReader(fileName);
-                    var model = reader.ToModel();
-                    Console.WriteLine(reader);
+                    listBox1.Items.Add(filePath);
+                    
+                    var reader = new PeHeaderReader(filePath);
+                    var model = reader.ToModel(filePath);
 
                     var input = new ModelInput();
                     model.FillInputModel(ref input);
@@ -171,10 +173,10 @@ namespace Antivirus.UserControls
                     ModelOutput result = ConsumeModel.Predict(input);
                     Console.WriteLine();
 
-                  /*  FullAntivirusCheck.ModelInput sampleData = new FullAntivirusCheck.ModelInput();
-                    PeHeaderReader reader = new PeHeaderReader(fileName);
-                    var model = reader.ToModel();
-                    model.FillFullCheckMLModelInput(ref sampleData);*/
+                    /*  FullAntivirusCheck.ModelInput sampleData = new FullAntivirusCheck.ModelInput();
+                      PeHeaderReader reader = new PeHeaderReader(filePath);
+                      var model = reader.ToModel();
+                      model.FillFullCheckMLModelInput(ref sampleData);*/
 
                     /*var predictionResult = FullAntivirusCheck.Predict(sampleData);
                     Console.WriteLine(predictionResult.Legitimate);*/
@@ -190,7 +192,7 @@ namespace Antivirus.UserControls
 
 
 
-        private string[] _getTextForPrinting(string[] fileNames)
+        private string[] GetMd5ForPrinting(string[] fileNames)
         {
             if (fileNames.isEmty())
             {
@@ -221,7 +223,7 @@ namespace Antivirus.UserControls
                 filePaths[i] = listBox1.Items[i].ToString();
             }
 
-            return _getTextForPrinting(filePaths);
+            return GetMd5ForPrinting(filePaths);
         }
 
         public string GetMD5FromFile(string filePath)
