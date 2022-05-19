@@ -34,7 +34,7 @@ namespace Antivirus.UserControls
 
         private void browseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            _openFileChoserDialog();
+            _OpenFileChoserDialog();
         }
 
         #region ScanBtn
@@ -71,6 +71,10 @@ namespace Antivirus.UserControls
                 }
                 else if (lblStatus.Text != Constants.kInfectedString)
                 {
+                    MLFileChecker fileChecker = new MLFileChecker(filePaths);
+                    fileChecker.CheckSelectedFiles();
+
+
                     lblStatus.Text = Constants.kCleanString;
                     lblStatus.ForeColor = Color.Green;
                 }
@@ -79,40 +83,8 @@ namespace Antivirus.UserControls
 
             if (infectedFiles.Count > 0)
             {
-                archivateInfectedFiles();
-            }
-        }
-
-        void archivateInfectedFiles()
-        {
-            foreach (var infectedFile in infectedFiles)
-            {
-                var filePath = infectedFile.Path;
-                var fileName = filePath.Split('\\').Last();
-                var pathToFileLocation = filePath.Replace(fileName, "");
-                var pathToZip = filePath.Replace(".txt", ".zip");
-                var temporaryFolder = $"{pathToFileLocation}virusesFolder";
-
-                // Get of rid remained zip files
-                if (File.Exists(pathToZip))
-                {
-                    File.Delete(pathToZip);
-                }
-
-                // Directory cleaning
-                if (Directory.Exists(temporaryFolder))
-                {
-                    string[] fileNamesInFolder = Directory.GetFiles(temporaryFolder);
-                    foreach (string name in fileNamesInFolder)
-                    {
-                        File.Delete(name);
-                    }
-                    Directory.Delete(temporaryFolder);
-                }
-
-                Directory.CreateDirectory(temporaryFolder);
-                File.Copy(filePath, $"{temporaryFolder}\\{fileName}");
-                ZipFile.CreateFromDirectory(temporaryFolder, pathToZip);
+                FileArchivator archivator = new FileArchivator(infectedFiles);
+                archivator.ArchivateMalvares();
             }
         }
 
@@ -146,10 +118,10 @@ namespace Antivirus.UserControls
 
         private void selectFileBtn_Click(object sender, EventArgs e)
         {
-            _openFileChoserDialog();
+            _OpenFileChoserDialog();
         }
 
-        private void _openFileChoserDialog()
+        private void _OpenFileChoserDialog()
         {
             listBox1.Items.Clear();
             threatsGridView.Rows.Clear();
@@ -164,52 +136,10 @@ namespace Antivirus.UserControls
                 {
                     listBox1.Items.Add(filePath);
 
-                    /*var reader = new PeHeaderReader(filePath);
-                    var model = reader.ToModel(filePath);
-
-                    var input = new ModelInput();
-                    model.FillInputModel(ref input);
-
-                    ModelOutput result = ConsumeModel.Predict(input);
-                    Console.WriteLine();*/
-
-                    EquatableMlModel.ModelInput sampleData = new EquatableMlModel.ModelInput();
-                    PeHeaderReader reader = new PeHeaderReader(filePath);
-                    if (reader.IsFileExecutable)
-                    {
-                        var model = reader.ToModel(filePath);
-                        model.EquatableMLModelInput(ref sampleData);
-
-                        var predictionResult = EquatableMlModel.Predict(sampleData);
-                        Console.WriteLine(predictionResult.Legitimate);
-                    }
                 }
             }
             
             ofd.Dispose();
-        }
-
-
-
-        private string[] GetMd5ForPrinting(string[] fileNames)
-        {
-            if (fileNames.isEmty())
-            {
-                return new string[1] { "" };
-            }
-
-            if (fileNames.Length == 1)
-            {
-                return new string[1] { GetMD5FromFile(fileNames.Last()) };
-            }
-
-            var keys = new List<string>() { GetMD5FromFile(fileNames[0]) };
-            for (int i = 1; i < fileNames.Length; i++)
-            {
-                keys.Add(GetMD5FromFile(fileNames[i]));
-            }
-
-            return keys.ToArray();
         }
 
         public string[] ConvertSignaturesToStringArray()
@@ -222,20 +152,8 @@ namespace Antivirus.UserControls
                 filePaths[i] = listBox1.Items[i].ToString();
             }
 
-            return GetMd5ForPrinting(filePaths);
+            return StringFormatter.GetMd5ForPrinting(filePaths);
         }
-
-        public string GetMD5FromFile(string filePath)
-        {
-            using (var md5 = MD5.Create())
-            {
-                using (var stream = File.OpenRead(filePath))
-                {
-                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty).ToLower();
-                }
-            }
-        }
-
         #endregion
     }
 }
