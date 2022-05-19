@@ -220,6 +220,20 @@ namespace Antivirus.Repository
         {
             public IMAGE_SECTION_HEADER sectionHeader;
             public float entropy;
+            public double meanRawSize;
+            public uint minRawSize;
+            public uint maxRawSize;
+        }
+
+        public struct SECTION_PROPS
+        {
+            public double meanRawSize;
+            public double minRawSize;
+            public double maxRawSize;
+            public double meanVirtualSize;
+            public double minVirtualSize;
+            public double maxVirtualSize;
+
         }
 
         [Flags]
@@ -426,6 +440,8 @@ namespace Antivirus.Repository
 
         private EXTENDED_IMAGE_SECTION_HEADER[] extendedImageSectionHeaders;
 
+        private SECTION_PROPS sectionProps;
+
         private String fileName;
         private String filePath;
         private bool isFileExecutable = true;
@@ -474,6 +490,7 @@ namespace Antivirus.Repository
                 }
 
                 extendedImageSectionHeaders = new EXTENDED_IMAGE_SECTION_HEADER[fileHeader.NumberOfSections];
+
                 for (int headerNo = 0; headerNo < extendedImageSectionHeaders.Length; ++headerNo)
                 {
                     byte[] bytes = GetBinaryReaderBytes<IMAGE_SECTION_HEADER>(reader);
@@ -484,6 +501,15 @@ namespace Antivirus.Repository
                     extendedImageSectionHeaders[headerNo].entropy = sectionEntropy;
                 }
 
+                var rawSizes = extendedImageSectionHeaders.Select(s => s.sectionHeader.SizeOfRawData).ToList();
+                sectionProps.meanRawSize = rawSizes.GetAverageValue();
+                sectionProps.minRawSize = rawSizes.Min();
+                sectionProps.maxRawSize = rawSizes.Max();
+
+                var virtualSizes = extendedImageSectionHeaders.Select(s => s.sectionHeader.VirtualSize).ToList();
+                sectionProps.meanVirtualSize = virtualSizes.GetAverageValue();
+                sectionProps.minVirtualSize = virtualSizes.Min();
+                sectionProps.maxVirtualSize = virtualSizes.Max();
             }
         }
 
@@ -703,11 +729,12 @@ namespace Antivirus.Repository
                     0, // SectionMeanEntropy
                     0, // SectionsMinEntropy
                     0, // SectionsMaxEntropy 
-                    0, // SectionsMeanRawsize 
-                    0, // SectionsMinRawsize 
-                    0, // SectionMaxRawsize 
-                    0, // SectionsMeanVirtualsize
-                    0, // SectionsMinVirtualsize 
+                    (int)sectionProps.meanRawSize, // SectionsMeanRawsize 
+                    sectionProps.minRawSize, // SectionsMinRawsize 
+                    sectionProps.maxRawSize, // SectionMaxRawsize 
+                    (int)sectionProps.meanVirtualSize, // SectionsMeanVirtualsize
+                    (int)sectionProps.minVirtualSize, // SectionsMinVirtualsize 
+                    (int)sectionProps.maxVirtualSize, // SectionsMaxVirtualsize 
                     0, // ImportsNbDLL
                     0, // ImportsNb
                     0, // ImportsNbOrdinal
@@ -765,11 +792,12 @@ namespace Antivirus.Repository
                     0, // SectionMeanEntropy
                     0, // SectionsMinEntropy
                     0, // SectionsMaxEntropy 
-                    0, // SectionsMeanRawsize 
-                    0, // SectionsMinRawsize 
-                    0, // SectionMaxRawsize 
-                    0, // 6762, // SectionsMeanVirtualsize
-                    0, // 103832, // SectionsMinVirtualsize 
+                    (int)sectionProps.meanRawSize, // SectionsMeanRawsize 
+                    sectionProps.minRawSize, // SectionsMinRawsize 
+                    sectionProps.maxRawSize, // SectionMaxRawsize 
+                    (int)sectionProps.meanVirtualSize, // 6762, // SectionsMeanVirtualsize
+                    (int)sectionProps.minVirtualSize, // 103832, // SectionsMinVirtualsize 
+                    (int)sectionProps.maxVirtualSize, // SectionsMaxVirtualsize
                     0, // 4, // ImportsNbDLL
                     0, // 106, // ImportsNb
                     0, // 2, // ImportsNbOrdinal
@@ -783,7 +811,7 @@ namespace Antivirus.Repository
                     0, // 72, // ResourcesMaxSize
                     0, // 16, // LoadConfigurationSize
                     0  //  VersionInformationSize
-                );
+                ); ;
         }
 
         #endregion

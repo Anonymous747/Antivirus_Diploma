@@ -11,7 +11,7 @@ namespace Antivirus.Model
 {
     public struct PeFileModel
     {
-        public PeFileModel(string name, string md5, ushort machine, ushort sizeOfOptionalHeader, ushort characteristics, byte majorLinkerVersion, byte minorLinkerVersion, uint sizeOfCode, uint sizeOfInitializedData, uint sizeOfUninitializedData, uint addressOfEntryPoint, uint baseOfCode, uint baseOfData, ulong imageBase, uint sectionAlignment, uint fileAlignment, ushort majorOperatingSystemVersion, ushort minorOperatingSystemVersion, ushort majorImageVersion, ushort minorImageVersion, ushort majorSubsystemVersion, ushort minorSubsystemVersion, uint sizeOfImage, uint sizeOfHeaders, uint checkSum, ushort subsystem, ushort dllCharacteristics, ulong sizeOfStackReserve, ulong sizeOfStackCommit, ulong sizeOfHeapReserve, ulong sizeOfHeapCommit, uint loaderFlags, uint numberOfRvaAndSizes, int sectionsNb, double sectionsMeanEntropy, double sectionsMinEntropy, double sectionsMaxEntropy, int sectionsMeanRawsize, double sectionsMinRawsize, double sectionMaxRawsize, int sectionsMeanVirtualsize, int sectionsMinVirtualsize, int importsNbDLL, int importsNb, int importsNbOrdinal, int exportNb, int resourcesNb, double resourcesMeanEntropy, double resourcesMinEntropy, double resourcesMaxEntropy, double resourcesMeanSize, int resourcesMinSize, int resourcesMaxSize, int loadConfigurationSize, int versionInformationSize)
+        public PeFileModel(string name, string md5, ushort machine, ushort sizeOfOptionalHeader, ushort characteristics, byte majorLinkerVersion, byte minorLinkerVersion, uint sizeOfCode, uint sizeOfInitializedData, uint sizeOfUninitializedData, uint addressOfEntryPoint, uint baseOfCode, uint baseOfData, ulong imageBase, uint sectionAlignment, uint fileAlignment, ushort majorOperatingSystemVersion, ushort minorOperatingSystemVersion, ushort majorImageVersion, ushort minorImageVersion, ushort majorSubsystemVersion, ushort minorSubsystemVersion, uint sizeOfImage, uint sizeOfHeaders, uint checkSum, ushort subsystem, ushort dllCharacteristics, ulong sizeOfStackReserve, ulong sizeOfStackCommit, ulong sizeOfHeapReserve, ulong sizeOfHeapCommit, uint loaderFlags, uint numberOfRvaAndSizes, int sectionsNb, double sectionsMeanEntropy, double sectionsMinEntropy, double sectionsMaxEntropy, int sectionsMeanRawsize, double sectionsMinRawsize, double sectionMaxRawsize, int sectionsMeanVirtualsize, int sectionsMinVirtualsize, int sectionsMaxVirtualsize, int importsNbDLL, int importsNb, int importsNbOrdinal, int exportNb, int resourcesNb, double resourcesMeanEntropy, double resourcesMinEntropy, double resourcesMaxEntropy, double resourcesMeanSize, int resourcesMinSize, int resourcesMaxSize, int loadConfigurationSize, int versionInformationSize)
         {
             Name = name;
             Md5 = md5;
@@ -55,6 +55,7 @@ namespace Antivirus.Model
             SectionMaxRawsize = sectionMaxRawsize;
             SectionsMeanVirtualsize = sectionsMeanVirtualsize;
             SectionsMinVirtualsize = sectionsMinVirtualsize;
+            SectionsMaxVirtualsize = sectionsMaxVirtualsize;
             ImportsNbDLL = importsNbDLL;
             ImportsNb = importsNb;
             ImportsNbOrdinal = importsNbOrdinal;
@@ -112,6 +113,7 @@ namespace Antivirus.Model
         public double SectionMaxRawsize { get; set; }
         public int SectionsMeanVirtualsize { get; set; }
         public int SectionsMinVirtualsize { get; set; }
+        public int SectionsMaxVirtualsize { get; set; }
         public int ImportsNbDLL { get; set; }
         public int ImportsNb { get; set; }
         public int ImportsNbOrdinal { get; set; }
@@ -165,9 +167,10 @@ namespace Antivirus.Model
             model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
             model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
             model.SectionsMeanRawsize = SectionsMeanRawsize;
-            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
+            model.SectionMaxRawsize = (float)SectionMaxRawsize; 
             model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
             model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionMaxVirtualsize = SectionsMaxVirtualsize;            
             model.SectionsMinEntropy = (float)SectionsMinEntropy;
             model.SectionsMinRawsize = (float)SectionsMinRawsize;
             model.SectionsNb = SectionsNb;
@@ -224,9 +227,11 @@ namespace Antivirus.Model
             model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
             model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
             model.SectionsMeanRawsize = SectionsMeanRawsize;
-            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
+            model.SectionMaxRawsize = (float)SectionMaxRawsize;
             model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
             model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionMaxVirtualsize = SectionsMaxVirtualsize;          
+            model.SectionsMinEntropy = (float)SectionsMinEntropy;
             model.SectionsMinEntropy = (float)SectionsMinEntropy;
             model.SectionsMinRawsize = (float)SectionsMinRawsize;
             model.SectionsNb = SectionsNb;
@@ -283,9 +288,11 @@ namespace Antivirus.Model
             model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
             model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
             model.SectionsMeanRawsize = SectionsMeanRawsize;
-            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
+            model.SectionMaxRawsize = (float)SectionMaxRawsize; 
             model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
             model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionMaxVirtualsize = SectionsMaxVirtualsize;           
+            model.SectionsMinEntropy = (float)SectionsMinEntropy;
             model.SectionsMinEntropy = (float)SectionsMinEntropy;
             model.SectionsMinRawsize = (float)SectionsMinRawsize;
             model.SectionsNb = SectionsNb;
@@ -342,9 +349,10 @@ namespace Antivirus.Model
             model.SectionsMaxEntropy = (float)SectionsMaxEntropy;
             model.SectionsMeanEntropy = (float)SectionsMeanEntropy;
             model.SectionsMeanRawsize = SectionsMeanRawsize;
-            model.SectionMaxRawsize = (float)SectionMaxRawsize; //  SectionMaxVirtualsize
+            model.SectionMaxRawsize = (float)SectionMaxRawsize; 
             model.SectionsMeanVirtualsize = SectionsMeanVirtualsize;
             model.SectionsMinVirtualsize = SectionsMinVirtualsize;
+            model.SectionMaxVirtualsize = SectionsMaxVirtualsize;
             model.SectionsMinEntropy = (float)SectionsMinEntropy;
             model.SectionsMinRawsize = (float)SectionsMinRawsize;
             model.SectionsNb = SectionsNb;
