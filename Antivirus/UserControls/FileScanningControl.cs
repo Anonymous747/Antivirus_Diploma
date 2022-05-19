@@ -65,7 +65,7 @@ namespace Antivirus.UserControls
                     threatsGridView[2, k].Value = "Trojan";
 
                     k++;
-                    
+
                     lblStatus.Text = Constants.kInfectedString;
                     lblStatus.ForeColor = Color.Red;
                 }
@@ -163,31 +163,30 @@ namespace Antivirus.UserControls
                 foreach (var filePath in filePaths)
                 {
                     listBox1.Items.Add(filePath);
-                    
-                    var reader = new PeHeaderReader(filePath);
+
+                    /*var reader = new PeHeaderReader(filePath);
                     var model = reader.ToModel(filePath);
 
                     var input = new ModelInput();
                     model.FillInputModel(ref input);
 
                     ModelOutput result = ConsumeModel.Predict(input);
-                    Console.WriteLine();
+                    Console.WriteLine();*/
 
-                    /*  FullAntivirusCheck.ModelInput sampleData = new FullAntivirusCheck.ModelInput();
-                      PeHeaderReader reader = new PeHeaderReader(filePath);
-                      var model = reader.ToModel();
-                      model.FillFullCheckMLModelInput(ref sampleData);*/
+                    EquatableMlModel.ModelInput sampleData = new EquatableMlModel.ModelInput();
+                    PeHeaderReader reader = new PeHeaderReader(filePath);
+                    if (reader.IsFileExecutable)
+                    {
+                        var model = reader.ToModel(filePath);
+                        model.EquatableMLModelInput(ref sampleData);
 
-                    /*var predictionResult = FullAntivirusCheck.Predict(sampleData);
-                    Console.WriteLine(predictionResult.Legitimate);*/
-                    // if (reader.Is32BitHeader)
-                    // {
-                    //    PeHeaderReader.IMAGE_OPTIONAL_HEADER64 header64 = reader.OptionalHeader64;
-                    // }
-                    // DateTime timeStamp = reader.TimeStamp;
-
+                        var predictionResult = EquatableMlModel.Predict(sampleData);
+                        Console.WriteLine(predictionResult.Legitimate);
+                    }
                 }
             }
+            
+            ofd.Dispose();
         }
 
 

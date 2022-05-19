@@ -427,8 +427,10 @@ namespace Antivirus.Repository
         private EXTENDED_IMAGE_SECTION_HEADER[] extendedImageSectionHeaders;
 
         private String fileName;
-
         private String filePath;
+        private bool isFileExecutable = true;
+
+        private const int EXECUTABLE_FILE_NUMBER = 23117;
 
         #endregion Private Fields
 
@@ -443,18 +445,25 @@ namespace Antivirus.Repository
             using (FileStream stream = new FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
             {
                 BinaryReader reader = new BinaryReader(stream);
-                var entropy = GetReaderBytes(reader).GetEntropy();
-                
-                stream.Seek(0, SeekOrigin.Begin);
+                /* var entropy = GetReaderBytes(reader).GetEntropy();
+
+                 stream.Seek(0, SeekOrigin.Begin);*/
 
                 dosHeader = FromBinaryReader<IMAGE_DOS_HEADER>(reader);
-               
+
+                // Is not a executable file
+                if (dosHeader.e_magic != EXECUTABLE_FILE_NUMBER)
+                {
+                    isFileExecutable = false;
+                    return;
+                }
+
                 // Add 4 bytes to the offset
                 stream.Seek(dosHeader.e_lfanew, SeekOrigin.Begin);
 
                 signature = FromBinaryReader<IMAGE_DATA_SIGNATURE>(reader);
                 fileHeader = FromBinaryReader<IMAGE_FILE_HEADER>(reader);
-                
+
                 if (this.Is32BitHeader)
                 {
                     optionalHeader32 = FromBinaryReader<IMAGE_OPTIONAL_HEADER32>(reader);
@@ -464,10 +473,10 @@ namespace Antivirus.Repository
                     optionalHeader64 = FromBinaryReader<IMAGE_OPTIONAL_HEADER64>(reader);
                 }
 
-                extendedImageSectionHeaders = new EXTENDED_IMAGE_SECTION_HEADER [fileHeader.NumberOfSections];
+                extendedImageSectionHeaders = new EXTENDED_IMAGE_SECTION_HEADER[fileHeader.NumberOfSections];
                 for (int headerNo = 0; headerNo < extendedImageSectionHeaders.Length; ++headerNo)
                 {
-                    byte[] bytes = GetBinaryReaderBytes<IMAGE_SECTION_HEADER>(reader);//FromBinaryReader<IMAGE_SECTION_HEADER>(reader);
+                    byte[] bytes = GetBinaryReaderBytes<IMAGE_SECTION_HEADER>(reader);
                     var sectionEntropy = bytes.GetEntropy();
                     IMAGE_SECTION_HEADER sectionHeader = FromBytesToModel<IMAGE_SECTION_HEADER>(bytes);
 
@@ -541,7 +550,7 @@ namespace Antivirus.Repository
             return theStructure;
         }
 
-        private const int READ_BUFFER_SIZE = 1024; 
+        private const int READ_BUFFER_SIZE = 1024;
 
         public static byte[] GetReaderBytes(BinaryReader reader)
         {
@@ -643,6 +652,8 @@ namespace Antivirus.Repository
             }
         }
 
+        public bool IsFileExecutable { get { return isFileExecutable; } }
+
         #endregion Properties
 
         #region Reduction
@@ -710,7 +721,7 @@ namespace Antivirus.Repository
                     0, // ResourcesMaxSize
                     0, // LoadConfigurationSize
                     0  //  VersionInformationSize
-                
+
                 );
         }
 
@@ -757,20 +768,20 @@ namespace Antivirus.Repository
                     0, // SectionsMeanRawsize 
                     0, // SectionsMinRawsize 
                     0, // SectionMaxRawsize 
-                    0, // SectionsMeanVirtualsize
-                    0, // SectionsMinVirtualsize 
-                    0, // ImportsNbDLL
-                    0, // ImportsNb
-                    0, // ImportsNbOrdinal
+                    0, // 6762, // SectionsMeanVirtualsize
+                    0, // 103832, // SectionsMinVirtualsize 
+                    0, // 4, // ImportsNbDLL
+                    0, // 106, // ImportsNb
+                    0, // 2, // ImportsNbOrdinal
                     0, // ExportNb
-                    0, // ResourcesNb
-                    0, // ResourcesMeanEntropy
-                    0, // ResourcesMinEntropy
-                    0, // ResourcesMaxEntropy
-                    0, // ResourcesMeanSize
-                    0, // ResourcesMeanSize
-                    0, // ResourcesMaxSize
-                    0, // LoadConfigurationSize
+                    0, // 6, // ResourcesNb
+                    0, // 3, // ResourcesMeanEntropy
+                    0, // 2, // ResourcesMinEntropy
+                    0, // 1060, // ResourcesMaxEntropy
+                    0, // 48, // ResourcesMeanSize
+                    0, // 3752, // ResourcesMeanSize
+                    0, // 72, // ResourcesMaxSize
+                    0, // 16, // LoadConfigurationSize
                     0  //  VersionInformationSize
                 );
         }

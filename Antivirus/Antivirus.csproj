@@ -24,4 +24,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup Label="EquatableMlModel">
+    <None Include="EquatableMlModel.consumption.cs">
+      <DependentUpon>EquatableMlModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="EquatableMlModel.training.cs">
+      <DependentUpon>EquatableMlModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="EquatableMlModel.zip">
+      <DependentUpon>EquatableMlModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

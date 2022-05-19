@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLModelAntivirus", "..\MLMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FullAntivirusCheck", "..\FullAntivirusCheck\FullAntivirusCheck.csproj", "{53A94ABC-A501-4343-A6F0-A3F9F8DDB360}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EquatableMlModel", "..\EquatableMlModel\EquatableMlModel.csproj", "{F10E7CD9-77F0-46DC-93E9-4249B1594617}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{53A94ABC-A501-4343-A6F0-A3F9F8DDB360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53A94ABC-A501-4343-A6F0-A3F9F8DDB360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53A94ABC-A501-4343-A6F0-A3F9F8DDB360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F10E7CD9-77F0-46DC-93E9-4249B1594617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F10E7CD9-77F0-46DC-93E9-4249B1594617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F10E7CD9-77F0-46DC-93E9-4249B1594617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F10E7CD9-77F0-46DC-93E9-4249B1594617}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
