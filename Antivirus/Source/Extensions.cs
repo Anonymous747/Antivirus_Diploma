@@ -1,4 +1,8 @@
-﻿namespace Antivirus.Source
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Antivirus.Source
 {
     static class Extensions
     {
@@ -15,5 +19,9 @@
             var array = s.Split('\\');
             return array[array.Length - 1];
         }
+
+        static public double GetAverageValue(this List<uint> rawSizes) => rawSizes.Aggregate((x, y) => x + y) / rawSizes.Count;
+
+        static public double GetAverageValue(this List<float> rawSizes) => rawSizes.Aggregate((x, y) => x + y) / rawSizes.Count;
     }
 }

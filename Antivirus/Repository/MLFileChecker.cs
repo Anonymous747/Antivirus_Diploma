@@ -33,9 +33,11 @@ namespace Antivirus.Repository
                 if (reader.IsFileExecutable)
                 {
                     var model = reader.ToModel(filePath);
-                    model.EquatableMLModelInput(ref sampleData);
+                    model.FillEquatableMLModelInput(ref sampleData);
 
                     var predictionResult = EquatableMlModel.Predict(sampleData);
+                    Console.WriteLine(predictionResult.PredictedLabel);
+                    Console.WriteLine(predictionResult.Probability);
                     Console.WriteLine(predictionResult.Legitimate);
                 }
             }

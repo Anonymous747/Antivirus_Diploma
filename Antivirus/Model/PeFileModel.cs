@@ -310,7 +310,7 @@ namespace Antivirus.Model
             model.VersionInformationSize = VersionInformationSize;
         }
          
-        public void EquatableMLModelInput(ref EquatableMlModel.ModelInput model)
+        public void FillEquatableMLModelInput(ref EquatableMlModel.ModelInput model)
         {
             model.AddressOfEntryPoint = AddressOfEntryPoint;
             model.BaseOfCode = BaseOfCode;

@@ -135,7 +135,6 @@ namespace Antivirus.UserControls
                 foreach (var filePath in filePaths)
                 {
                     listBox1.Items.Add(filePath);
-
                 }
             }
             
