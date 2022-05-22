@@ -86,42 +86,56 @@ namespace Antivirus.Repository
                 signature = FromBinaryReader<IMAGE_DATA_SIGNATURE>(reader);
                 fileHeader = FromBinaryReader<IMAGE_FILE_HEADER>(reader);
 
-                if (this.Is32BitHeader)
-                {
-                    optionalHeader32 = FromBinaryReader<IMAGE_OPTIONAL_HEADER32>(reader);
-                }
-                else
-                {
-                    optionalHeader64 = FromBinaryReader<IMAGE_OPTIONAL_HEADER64>(reader);
-                }
-
+               
                 extendedImageSectionHeaders = new EXTENDED_IMAGE_SECTION_HEADER[fileHeader.NumberOfSections];
 
-                for (int headerNo = 0; headerNo < extendedImageSectionHeaders.Length; ++headerNo)
-                {
-                    byte[] bytes = GetBinaryReaderBytes<IMAGE_SECTION_HEADER>(reader);
-                    var sectionEntropy = bytes.GetEntropy();
-                    IMAGE_SECTION_HEADER sectionHeader = FromBytesToModel<IMAGE_SECTION_HEADER>(bytes);
-
-                    extendedImageSectionHeaders[headerNo].sectionHeader = sectionHeader;
-                    extendedImageSectionHeaders[headerNo].entropy = sectionEntropy;
-                }
-
-                var entropyies = extendedImageSectionHeaders.Select(s => s.entropy).ToList();
-                sectionProps.meanEntropy = entropyies.GetAverageValue();
-                sectionProps.minEntropy = entropyies.Min();
-                sectionProps.maxEntropy = entropyies.Max();
-
-                var rawSizes = extendedImageSectionHeaders.Select(s => s.sectionHeader.SizeOfRawData).ToList();
-                sectionProps.meanRawSize = rawSizes.GetAverageValue();
-                sectionProps.minRawSize = rawSizes.Min();
-                sectionProps.maxRawSize = rawSizes.Max();
-
-                var virtualSizes = extendedImageSectionHeaders.Select(s => s.sectionHeader.VirtualSize).ToList();
-                sectionProps.meanVirtualSize = virtualSizes.GetAverageValue();
-                sectionProps.minVirtualSize = virtualSizes.Min();
-                sectionProps.maxVirtualSize = virtualSizes.Max();
+                FillOptionalHeader(reader);
+                FillImageSections(reader);
+                FillSectionProps();
             }
+        }
+
+        private void FillOptionalHeader(BinaryReader reader)
+        {
+            if (this.Is32BitHeader)
+            {
+                optionalHeader32 = FromBinaryReader<IMAGE_OPTIONAL_HEADER32>(reader);
+            }
+            else
+            {
+                optionalHeader64 = FromBinaryReader<IMAGE_OPTIONAL_HEADER64>(reader);
+            }
+        }
+
+        private void FillImageSections(BinaryReader reader)
+        {
+            for (int headerNo = 0; headerNo < extendedImageSectionHeaders.Length; ++headerNo)
+            {
+                byte[] bytes = GetBinaryReaderBytes<IMAGE_SECTION_HEADER>(reader);
+                var sectionEntropy = bytes.GetEntropy();
+                IMAGE_SECTION_HEADER sectionHeader = FromBytesToModel<IMAGE_SECTION_HEADER>(bytes);
+
+                extendedImageSectionHeaders[headerNo].sectionHeader = sectionHeader;
+                extendedImageSectionHeaders[headerNo].entropy = sectionEntropy;
+            }
+        }
+
+        private void FillSectionProps()
+        {
+            var entropyies = extendedImageSectionHeaders.Select(s => s.entropy).ToList();
+            sectionProps.meanEntropy = entropyies.GetAverageValue();
+            sectionProps.minEntropy = entropyies.Min();
+            sectionProps.maxEntropy = entropyies.Max();
+
+            var rawSizes = extendedImageSectionHeaders.Select(s => s.sectionHeader.SizeOfRawData).ToList();
+            sectionProps.meanRawSize = rawSizes.GetAverageValue();
+            sectionProps.minRawSize = rawSizes.Min();
+            sectionProps.maxRawSize = rawSizes.Max();
+
+            var virtualSizes = extendedImageSectionHeaders.Select(s => s.sectionHeader.VirtualSize).ToList();
+            sectionProps.meanVirtualSize = virtualSizes.GetAverageValue();
+            sectionProps.minVirtualSize = virtualSizes.Min();
+            sectionProps.maxVirtualSize = virtualSizes.Max();
         }
 
         /// <summary>
