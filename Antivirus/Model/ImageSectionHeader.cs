@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using static Antivirus.Repository.PeHeaderReader;
 
 namespace Antivirus.Model
 {

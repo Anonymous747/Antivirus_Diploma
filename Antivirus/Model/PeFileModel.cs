@@ -1,11 +1,6 @@
-﻿using Antivirus.Repository;
-using AntivirusML.Model;
+﻿using AntivirusML.Model;
 using MLModelAntivirus;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Antivirus.Model
 {

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
 using Antivirus.Model;
-using System.Text;
-using System.Diagnostics;
 using Antivirus.Source;
 using System.Linq;
-using Antivirus.Source;
 
 namespace Antivirus.Repository
 {
@@ -40,12 +36,16 @@ namespace Antivirus.Repository
         /// </summary>
         private IMAGE_OPTIONAL_HEADER64 optionalHeader64;
         /// <summary>
-        /// Image Section headers. Number of sections is in the file header.
+        /// Imare resource file directory 
         /// </summary>
-        private IMAGE_SECTION_HEADER imageSectionHeader;
-
+        private IMAGE_RESOURCE_DIRECTORY resourceDirectory;
+        /// <summary>
+        /// The array of image section headers with some props
+        /// </summary>
         private EXTENDED_IMAGE_SECTION_HEADER[] extendedImageSectionHeaders;
-
+        /// <summary>
+        /// Sensitive properties of executable file
+        /// </summary>
         private SECTION_PROPS sectionProps;
 
         private String fileName;
@@ -67,13 +67,9 @@ namespace Antivirus.Repository
             using (FileStream stream = new FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
             {
                 BinaryReader reader = new BinaryReader(stream);
-                /* var entropy = GetReaderBytes(reader).GetEntropy();
-
-                 stream.Seek(0, SeekOrigin.Begin);*/
-
                 dosHeader = FromBinaryReader<IMAGE_DOS_HEADER>(reader);
 
-                // Is not a executable file
+                // Is not an executable file
                 if (dosHeader.e_magic != EXECUTABLE_FILE_NUMBER)
                 {
                     isFileExecutable = false;
@@ -86,12 +82,13 @@ namespace Antivirus.Repository
                 signature = FromBinaryReader<IMAGE_DATA_SIGNATURE>(reader);
                 fileHeader = FromBinaryReader<IMAGE_FILE_HEADER>(reader);
 
-               
                 extendedImageSectionHeaders = new EXTENDED_IMAGE_SECTION_HEADER[fileHeader.NumberOfSections];
 
                 FillOptionalHeader(reader);
                 FillImageSections(reader);
                 FillSectionProps();
+
+                FillResources(stream, reader);
             }
         }
 
@@ -104,6 +101,20 @@ namespace Antivirus.Repository
             else
             {
                 optionalHeader64 = FromBinaryReader<IMAGE_OPTIONAL_HEADER64>(reader);
+            }
+        }
+
+        private void FillResources(FileStream stream, BinaryReader reader)
+        {
+            var virtualAdress = Is32BitHeader ? optionalHeader32.ResourceTable.VirtualAddress : optionalHeader64.ResourceTable.VirtualAddress;
+
+            if (virtualAdress != 0)
+            {
+                stream.Seek(virtualAdress, SeekOrigin.Begin);
+
+                resourceDirectory = FromBinaryReader<IMAGE_RESOURCE_DIRECTORY>(reader);
+                Console.WriteLine();
+
             }
         }
 
@@ -279,14 +290,6 @@ namespace Antivirus.Repository
             }
         }
 
-        public IMAGE_SECTION_HEADER ImageSectionHeader
-        {
-            get
-            {
-                return imageSectionHeader;
-            }
-        }
-
         public EXTENDED_IMAGE_SECTION_HEADER[] ExtendedImageSectionHeaders
         {
             get
@@ -335,7 +338,7 @@ namespace Antivirus.Repository
                     fileHeader.Characteristics,
                     optionalHeader32.MajorLinkerVersion,
                     optionalHeader32.MinorLinkerVersion,
-                     optionalHeader32.SizeOfCode,
+                    optionalHeader32.SizeOfCode,
                     optionalHeader32.SizeOfInitializedData,
                     optionalHeader32.SizeOfUninitializedData,
                     optionalHeader32.AddressOfEntryPoint,
@@ -350,7 +353,7 @@ namespace Antivirus.Repository
                     optionalHeader32.MajorSubsystemVersion,
                     optionalHeader32.MinorOperatingSystemVersion,
                     optionalHeader32.MinorSubsystemVersion,
-                   optionalHeader32.SizeOfImage,
+                    optionalHeader32.SizeOfImage,
                     optionalHeader32.SizeOfHeaders,
                     optionalHeader32.CheckSum,
                     optionalHeader32.Subsystem,
@@ -384,8 +387,7 @@ namespace Antivirus.Repository
                     0, // ResourcesMaxSize
                     0, // LoadConfigurationSize
                     0  //  VersionInformationSize
-
-                );
+            );
         }
 
         public PeFileModel Create64PeFileModel()
@@ -398,7 +400,7 @@ namespace Antivirus.Repository
                     fileHeader.Characteristics,
                     optionalHeader64.MajorLinkerVersion,
                     optionalHeader64.MinorLinkerVersion,
-                     optionalHeader64.SizeOfCode,
+                    optionalHeader64.SizeOfCode,
                     optionalHeader64.SizeOfInitializedData,
                     optionalHeader64.SizeOfUninitializedData,
                     optionalHeader64.AddressOfEntryPoint,
@@ -425,10 +427,10 @@ namespace Antivirus.Repository
                     optionalHeader64.LoaderFlags,
                     optionalHeader64.NumberOfRvaAndSizes,
                     extendedImageSectionHeaders.Length, // SectionsNb
-                    (int)sectionProps.meanRawSize, // SectionsMeanRawsize 
+                    (int)sectionProps.meanRawSize, // SectionsMeanRawsize
                     sectionProps.minRawSize, // SectionsMinRawsize 
                     sectionProps.maxRawSize, // SectionMaxRawsize 
-                    (int)sectionProps.meanRawSize, // SectionsMeanRawsize 
+                    (int)sectionProps.meanRawSize, // SectionsMeanRawsize
                     sectionProps.minRawSize, // SectionsMinRawsize 
                     sectionProps.maxRawSize, // SectionMaxRawsize 
                     (int)sectionProps.meanVirtualSize, // 6762, // SectionsMeanVirtualsize
@@ -447,12 +449,9 @@ namespace Antivirus.Repository
                     0, // 72, // ResourcesMaxSize
                     0, // 16, // LoadConfigurationSize
                     0  //  VersionInformationSize
-                ); ;
+                );
         }
-
         #endregion
-
-
     }
 }
 
