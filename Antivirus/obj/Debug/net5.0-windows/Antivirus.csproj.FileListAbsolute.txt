@@ -67,3 +67,4 @@ A:\Diploma\Antivirus\bin\Debug\net5.0-windows\FullAntivirusCheck.zip
 A:\Diploma\Antivirus\bin\Debug\net5.0-windows\FullAntivirusCheck.dll
 A:\Diploma\Antivirus\bin\Debug\net5.0-windows\FullAntivirusCheck.pdb
 A:\Diploma\Antivirus\bin\Debug\net5.0-windows\EquatableMlModel.zip
+A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.Properties.Resources.resources

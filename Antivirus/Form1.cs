@@ -36,11 +36,11 @@ namespace Antivirus
         private void InitializeNavigationButton()
         {
             List<Button> buttons = new List<Button>() { 
-                scannerBtn, quarantineBtn, systemBtn, updatesBtn, aboutBtn
+                //scannerBtn, quarantineBtn, systemBtn, updatesBtn, aboutBtn
             };
 
             navigationButtons = new NavigationButtons(buttons, btnDefaultColor, btnSelectedtColor);
-            navigationButtons.HighlightButton(scannerBtn);
+            //navigationButtons.HighlightButton(scannerBtn);
         }
 
         private void InitializeNavigationControl()
@@ -49,8 +49,8 @@ namespace Antivirus
             { new FileScanningControl(), new QuarantineControl(), new SystemInformationControl(),
             new UpdatesControl(), new AboutApplicationControl() };
 
-            navigationControl = new NavigationControl(userControls, panel2);
-            navigationControl.Display(Constants.kFileScanningScreenIndex);
+            //navigationControl = new NavigationControl(userControls, panel2);
+            //navigationControl.Display(Constants.kFileScanningScreenIndex);
         }
 
         #endregion
@@ -60,31 +60,31 @@ namespace Antivirus
         private void quarantineBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(Constants.kQuarantineScreenIndex);
-            navigationButtons.HighlightButton(quarantineBtn);
+            //navigationButtons.HighlightButton(quarantineBtn);
         }
 
         private void aboutBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(Constants.kAboutAppScreenIndex);
-            navigationButtons.HighlightButton(aboutBtn);
+            //navigationButtons.HighlightButton(aboutBtn);
         }
 
         private void updatesBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(Constants.kUpdatesScreenIndex);
-            navigationButtons.HighlightButton(updatesBtn);
+            //navigationButtons.HighlightButton(updatesBtn);
         }
 
         private void systemBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(Constants.kSystemInformationScreenIndex);
-            navigationButtons.HighlightButton(systemBtn);
+            //navigationButtons.HighlightButton(systemBtn);
         }
 
         private void scannerBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(Constants.kFileScanningScreenIndex);
-            navigationButtons.HighlightButton(scannerBtn);
+            //navigationButtons.HighlightButton(scannerBtn);
         }
 
         #endregion
@@ -200,5 +200,19 @@ namespace Antivirus
 
         #endregion
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
