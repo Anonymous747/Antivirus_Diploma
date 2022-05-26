@@ -46,11 +46,11 @@ namespace Antivirus
         private void InitializeNavigationControl()
         {
             List<UserControl> userControls = new List<UserControl>()
-            { new FileScanningControl(), new QuarantineControl(), new SystemInformationControl(),
+            { new HomeControl(), new FileScanningControl(), new QuarantineControl(), new SystemInformationControl(),
             new UpdatesControl(), new AboutApplicationControl() };
 
-            //navigationControl = new NavigationControl(userControls, panel2);
-            //navigationControl.Display(Constants.kFileScanningScreenIndex);
+            navigationControl = new NavigationControl(userControls, panel2);
+            navigationControl.Display(Constants.kHomeScreenIndex);
         }
 
         #endregion
@@ -211,6 +211,11 @@ namespace Antivirus
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
         {
 
         }

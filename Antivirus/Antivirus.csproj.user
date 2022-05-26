@@ -13,6 +13,9 @@
     <Compile Update="UserControls\FileScanningControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\HomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\QuarantineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
