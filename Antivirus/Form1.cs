@@ -12,8 +12,11 @@ namespace Antivirus
 {
     public partial class Form1 : Form
     {
+
+        public const int kHomeScreenIndex = 0;
+
         NavigationControl navigationControl;
-        NavigationButtons navigationButtons;
+        //NavigationButtons navigationButtons;
 
         Color btnDefaultColor = Color.FromKnownColor(KnownColor.ControlLight);
         Color btnSelectedtColor = Color.FromKnownColor(KnownColor.ControlDark);
@@ -22,7 +25,7 @@ namespace Antivirus
         {
             InitializeComponent();
             InitializeNavigationControl();
-            InitializeNavigationButton();
+            //InitializeNavigationButton();
         }
 
 
@@ -33,29 +36,31 @@ namespace Antivirus
 
         #region Navigation
 
-        private void InitializeNavigationButton()
+       /* private void InitializeNavigationButton()
         {
             List<Button> buttons = new List<Button>() { 
                 //scannerBtn, quarantineBtn, systemBtn, updatesBtn, aboutBtn
             };
 
-            navigationButtons = new NavigationButtons(buttons, btnDefaultColor, btnSelectedtColor);
+            //navigationButtons = new NavigationButtons(buttons, btnDefaultColor, btnSelectedtColor);
             //navigationButtons.HighlightButton(scannerBtn);
-        }
+        }*/
 
         private void InitializeNavigationControl()
         {
             List<UserControl> userControls = new List<UserControl>()
-            { new HomeControl(), new FileScanningControl(), new QuarantineControl(), new SystemInformationControl(),
-            new UpdatesControl(), new AboutApplicationControl() };
+            { new HomeControl(panel2), new FileScanningControl(),
+            /*     new QuarantineControl(), new SystemInformationControl(),
+            new UpdatesControl(), new AboutApplicationControl()*/
+            };
 
             navigationControl = new NavigationControl(userControls, panel2);
-            navigationControl.Display(Constants.kHomeScreenIndex);
+            navigationControl.Display(kHomeScreenIndex);
         }
 
         #endregion
 
-        #region Buttons
+        /*#region Buttons
 
         private void quarantineBtn_Click(object sender, EventArgs e)
         {
@@ -87,7 +92,7 @@ namespace Antivirus
             //navigationButtons.HighlightButton(scannerBtn);
         }
 
-        #endregion
+        #endregion*/
 
         #region BgrndWorker
 
@@ -200,24 +205,11 @@ namespace Antivirus
 
         #endregion
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+
+        /*private void button4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
+            navigationControl.Display(Constants.kFileScanningScreenIndex);
+            //navigationButtons.HighlightButton(scannerBtn);
+        }*/
     }
 }

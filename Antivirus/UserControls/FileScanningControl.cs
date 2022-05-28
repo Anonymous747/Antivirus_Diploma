@@ -154,5 +154,11 @@ namespace Antivirus.UserControls
             return StringFormatter.GetMd5ForPrinting(filePaths);
         }
         #endregion
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
