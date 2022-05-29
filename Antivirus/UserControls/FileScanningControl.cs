@@ -44,7 +44,7 @@ namespace Antivirus.UserControls
             var mdSignatures = File.ReadAllLines("MD5Base.txt");
             var signatures = ConvertSignaturesToStringArray();
 
-            lblStatus.Text = "";
+            ScanResulLabel.Text = "";
             threatsGridView.Rows.Clear();
 
             progressBar1.Maximum = Constants.kMaximumLoaderValue;
@@ -66,17 +66,17 @@ namespace Antivirus.UserControls
 
                     k++;
 
-                    lblStatus.Text = Constants.kInfectedString;
-                    lblStatus.ForeColor = Color.Red;
+                    ScanResulLabel.Text = Constants.kInfectedString;
+                    ScanResulLabel.ForeColor = ColorPalette.Red;
                 }
-                else if (lblStatus.Text != Constants.kInfectedString)
+                else if (ScanResulLabel.Text != Constants.kInfectedString)
                 {
                     MLFileChecker fileChecker = new MLFileChecker(filePaths);
                     fileChecker.CheckSelectedFiles();
 
 
-                    lblStatus.Text = Constants.kCleanString;
-                    lblStatus.ForeColor = Color.Green;
+                    ScanResulLabel.Text = Constants.kCleanString;
+                    ScanResulLabel.ForeColor = ColorPalette.Green;
                 }
                 StartProgressBarCalculations(signatures, i + 1);
             }

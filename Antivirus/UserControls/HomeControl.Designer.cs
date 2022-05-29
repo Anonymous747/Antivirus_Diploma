@@ -70,6 +70,10 @@ namespace Antivirus.UserControls
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel6.SuspendLayout();
@@ -405,9 +409,9 @@ namespace Antivirus.UserControls
             this.label8.ForeColor = System.Drawing.SystemColors.Control;
             this.label8.Location = new System.Drawing.Point(113, 23);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(145, 31);
+            this.label8.Size = new System.Drawing.Size(299, 31);
             this.label8.TabIndex = 16;
-            this.label8.Text = "My Antivirus";
+            this.label8.Text = "WinDefender Total Security";
             // 
             // panel1
             // 
@@ -563,11 +567,59 @@ namespace Antivirus.UserControls
             this.label1.TabIndex = 0;
             this.label1.Text = "You\'re Currently Protected";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Symbol", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(208)))), ((int)(((byte)(220)))));
+            this.label9.Location = new System.Drawing.Point(35, 672);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 25);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "WinDefender";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(170)))));
+            this.label18.Location = new System.Drawing.Point(625, 672);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(102, 25);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "30 Day Left";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(170)))));
+            this.label19.Location = new System.Drawing.Point(746, 672);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(83, 25);
+            this.label19.TabIndex = 25;
+            this.label19.Text = "Buy Now";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(208)))), ((int)(((byte)(220)))));
+            this.label20.Location = new System.Drawing.Point(930, 671);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(162, 25);
+            this.label20.TabIndex = 26;
+            this.label20.Text = "Help and Support?";
+            // 
             // HomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -644,5 +696,9 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
     }
 }

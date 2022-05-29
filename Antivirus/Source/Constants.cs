@@ -2,9 +2,8 @@
 {
     static class Constants
     {
-        public const string kInfectedString = "Infected!";
-        public const string kCleanString = "Clean!";
-
+        public const string kInfectedString = "Infected Files Detected";
+        public const string kCleanString = "No Infections Detected!";
        
         public const int kMaximumLoaderValue = 1000;
     }

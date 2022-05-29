@@ -36,18 +36,19 @@ namespace Antivirus.UserControls
             this.PathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThreatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.scanBtn = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.selectFileBtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
+            this.LastUpdateValue = new System.Windows.Forms.Label();
+            this.LastScanValue = new System.Windows.Forms.Label();
+            this.TimeTakenNumber = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.ItemScannedNumber = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.ScanResulLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -118,15 +119,6 @@ namespace Antivirus.UserControls
             this.ThreatColumn.MinimumWidth = 6;
             this.ThreatColumn.Name = "ThreatColumn";
             // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(484, 221);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(83, 20);
-            this.lblStatus.TabIndex = 15;
-            this.lblStatus.Text = "Status: N/A";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -179,16 +171,18 @@ namespace Antivirus.UserControls
             this.selectFileBtn.Size = new System.Drawing.Size(230, 54);
             this.selectFileBtn.TabIndex = 16;
             this.selectFileBtn.Text = "Choose File";
-            this.selectFileBtn.Click += new System.EventHandler(this.scanBtn_Click);
+            this.selectFileBtn.Click += new System.EventHandler(this.selectFileBtn_Click);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(25)))), ((int)(((byte)(36)))));
-            this.panel3.Controls.Add(this.label10);
+            this.panel3.Controls.Add(this.LastUpdateValue);
+            this.panel3.Controls.Add(this.LastScanValue);
+            this.panel3.Controls.Add(this.TimeTakenNumber);
             this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.ItemScannedNumber);
             this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.ScanResulLabel);
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.label1);
@@ -198,15 +192,35 @@ namespace Antivirus.UserControls
             this.panel3.Size = new System.Drawing.Size(1089, 123);
             this.panel3.TabIndex = 23;
             // 
-            // label10
+            // LastUpdateValue
             // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(77)))), ((int)(((byte)(80)))));
-            this.label10.Location = new System.Drawing.Point(476, 78);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 20);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "00:00:01";
+            this.LastUpdateValue.AutoSize = true;
+            this.LastUpdateValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
+            this.LastUpdateValue.Location = new System.Drawing.Point(256, 78);
+            this.LastUpdateValue.Name = "LastUpdateValue";
+            this.LastUpdateValue.Size = new System.Drawing.Size(49, 20);
+            this.LastUpdateValue.TabIndex = 10;
+            this.LastUpdateValue.Text = "Today";
+            // 
+            // LastScanValue
+            // 
+            this.LastScanValue.AutoSize = true;
+            this.LastScanValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
+            this.LastScanValue.Location = new System.Drawing.Point(236, 58);
+            this.LastScanValue.Name = "LastScanValue";
+            this.LastScanValue.Size = new System.Drawing.Size(49, 20);
+            this.LastScanValue.TabIndex = 9;
+            this.LastScanValue.Text = "Today";
+            // 
+            // TimeTakenNumber
+            // 
+            this.TimeTakenNumber.AutoSize = true;
+            this.TimeTakenNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(77)))), ((int)(((byte)(80)))));
+            this.TimeTakenNumber.Location = new System.Drawing.Point(476, 78);
+            this.TimeTakenNumber.Name = "TimeTakenNumber";
+            this.TimeTakenNumber.Size = new System.Drawing.Size(63, 20);
+            this.TimeTakenNumber.TabIndex = 8;
+            this.TimeTakenNumber.Text = "00:00:01";
             // 
             // label9
             // 
@@ -218,15 +232,15 @@ namespace Antivirus.UserControls
             this.label9.TabIndex = 7;
             this.label9.Text = "Time Taken:";
             // 
-            // label7
+            // ItemScannedNumber
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(77)))), ((int)(((byte)(80)))));
-            this.label7.Location = new System.Drawing.Point(499, 58);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 20);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "0";
+            this.ItemScannedNumber.AutoSize = true;
+            this.ItemScannedNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(77)))), ((int)(((byte)(80)))));
+            this.ItemScannedNumber.Location = new System.Drawing.Point(499, 58);
+            this.ItemScannedNumber.Name = "ItemScannedNumber";
+            this.ItemScannedNumber.Size = new System.Drawing.Size(17, 20);
+            this.ItemScannedNumber.TabIndex = 6;
+            this.ItemScannedNumber.Text = "0";
             // 
             // label6
             // 
@@ -238,16 +252,16 @@ namespace Antivirus.UserControls
             this.label6.TabIndex = 5;
             this.label6.Text = "Items Scanned:";
             // 
-            // label5
+            // ScanResulLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Cooper Black", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
-            this.label5.Location = new System.Drawing.Point(332, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(285, 26);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "No Infections Detected!";
+            this.ScanResulLabel.AutoSize = true;
+            this.ScanResulLabel.Font = new System.Drawing.Font("Cooper Black", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ScanResulLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
+            this.ScanResulLabel.Location = new System.Drawing.Point(332, 15);
+            this.ScanResulLabel.Name = "ScanResulLabel";
+            this.ScanResulLabel.Size = new System.Drawing.Size(285, 26);
+            this.ScanResulLabel.TabIndex = 4;
+            this.ScanResulLabel.Text = "No Infections Detected!";
             // 
             // pictureBox1
             // 
@@ -266,9 +280,9 @@ namespace Antivirus.UserControls
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
             this.label3.Location = new System.Drawing.Point(159, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 20);
+            this.label3.Size = new System.Drawing.Size(91, 20);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Las Update: Today";
+            this.label3.Text = "Last Update:";
             // 
             // label1
             // 
@@ -278,9 +292,9 @@ namespace Antivirus.UserControls
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
             this.label1.Location = new System.Drawing.Point(159, 58);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.Size = new System.Drawing.Size(71, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Last scan: Today";
+            this.label1.Text = "Last scan:";
             // 
             // label4
             // 
@@ -304,7 +318,6 @@ namespace Antivirus.UserControls
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.threatsGridView);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.selectFileBtn);
             this.Controls.Add(this.scanBtn);
@@ -327,7 +340,6 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.DataGridView threatsGridView;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button scanBtn;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -341,10 +353,12 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label ItemScannedNumber;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label ScanResulLabel;
+        private System.Windows.Forms.Label TimeTakenNumber;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label LastUpdateValue;
+        private System.Windows.Forms.Label LastScanValue;
     }
 }
