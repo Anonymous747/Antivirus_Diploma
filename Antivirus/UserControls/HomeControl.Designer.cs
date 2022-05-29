@@ -43,7 +43,7 @@ namespace Antivirus.UserControls
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.FirewallBtn = new System.Windows.Forms.Button();
+            this.QuarantineBtn = new System.Windows.Forms.Button();
             this.customToggleButton3 = new Antivirus.CustomWidgets.CustomToggleButton();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -233,7 +233,7 @@ namespace Antivirus.UserControls
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(25)))), ((int)(((byte)(36)))));
-            this.panel5.Controls.Add(this.FirewallBtn);
+            this.panel5.Controls.Add(this.QuarantineBtn);
             this.panel5.Controls.Add(this.customToggleButton3);
             this.panel5.Controls.Add(this.pictureBox4);
             this.panel5.Controls.Add(this.label12);
@@ -243,16 +243,17 @@ namespace Antivirus.UserControls
             this.panel5.Size = new System.Drawing.Size(214, 311);
             this.panel5.TabIndex = 22;
             // 
-            // FirewallBtn
+            // QuarantineBtn
             // 
-            this.FirewallBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FirewallBtn.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.FirewallBtn.Location = new System.Drawing.Point(40, 210);
-            this.FirewallBtn.Name = "FirewallBtn";
-            this.FirewallBtn.Size = new System.Drawing.Size(133, 40);
-            this.FirewallBtn.TabIndex = 12;
-            this.FirewallBtn.Text = "Manage";
-            this.FirewallBtn.UseVisualStyleBackColor = true;
+            this.QuarantineBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.QuarantineBtn.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.QuarantineBtn.Location = new System.Drawing.Point(40, 210);
+            this.QuarantineBtn.Name = "QuarantineBtn";
+            this.QuarantineBtn.Size = new System.Drawing.Size(133, 40);
+            this.QuarantineBtn.TabIndex = 12;
+            this.QuarantineBtn.Text = "Manage";
+            this.QuarantineBtn.UseVisualStyleBackColor = true;
+            this.QuarantineBtn.Click += new System.EventHandler(this.QuarantineBtn_Click_1);
             // 
             // customToggleButton3
             // 
@@ -286,11 +287,11 @@ namespace Antivirus.UserControls
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.ForeColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(55, 29);
+            this.label12.Location = new System.Drawing.Point(39, 29);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 27);
+            this.label12.Size = new System.Drawing.Size(138, 27);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Firewall";
+            this.label12.Text = "Quarantine";
             // 
             // label13
             // 
@@ -299,9 +300,9 @@ namespace Antivirus.UserControls
             this.label13.ForeColor = System.Drawing.SystemColors.Control;
             this.label13.Location = new System.Drawing.Point(16, 267);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 20);
+            this.label13.Size = new System.Drawing.Size(90, 20);
             this.label13.TabIndex = 1;
-            this.label13.Text = "Firewall";
+            this.label13.Text = "Auto Detect";
             // 
             // pictureBox2
             // 
@@ -616,7 +617,7 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button FirewallBtn;
+        private System.Windows.Forms.Button QuarantineBtn;
         private CustomWidgets.CustomToggleButton customToggleButton3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label12;

@@ -61,21 +61,23 @@ namespace Antivirus.UserControls
             // listBox1
             // 
             this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(25)))), ((int)(((byte)(36)))));
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(35, 93);
+            this.listBox1.Location = new System.Drawing.Point(35, 108);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(843, 124);
+            this.listBox1.Size = new System.Drawing.Size(841, 120);
             this.listBox1.TabIndex = 20;
             // 
             // progressBar1
             // 
             this.progressBar1.ForeColor = System.Drawing.Color.SlateBlue;
-            this.progressBar1.Location = new System.Drawing.Point(35, 245);
+            this.progressBar1.Location = new System.Drawing.Point(35, 257);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1072, 29);
+            this.progressBar1.Size = new System.Drawing.Size(1089, 29);
             this.progressBar1.TabIndex = 18;
             // 
             // threatsGridView
@@ -92,7 +94,7 @@ namespace Antivirus.UserControls
             this.threatsGridView.Name = "threatsGridView";
             this.threatsGridView.RowHeadersWidth = 51;
             this.threatsGridView.RowTemplate.Height = 24;
-            this.threatsGridView.Size = new System.Drawing.Size(1072, 212);
+            this.threatsGridView.Size = new System.Drawing.Size(1089, 419);
             this.threatsGridView.TabIndex = 17;
             // 
             // PathColumn
@@ -138,10 +140,10 @@ namespace Antivirus.UserControls
             // 
             this.scanBtn.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.scanBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
-            this.scanBtn.Location = new System.Drawing.Point(894, 165);
+            this.scanBtn.Location = new System.Drawing.Point(894, 180);
             this.scanBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.scanBtn.Name = "scanBtn";
-            this.scanBtn.Size = new System.Drawing.Size(213, 52);
+            this.scanBtn.Size = new System.Drawing.Size(230, 52);
             this.scanBtn.TabIndex = 16;
             this.scanBtn.Text = "Scan";
             this.scanBtn.Click += new System.EventHandler(this.scanBtn_Click);
@@ -171,10 +173,10 @@ namespace Antivirus.UserControls
             // 
             this.selectFileBtn.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.selectFileBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
-            this.selectFileBtn.Location = new System.Drawing.Point(894, 93);
+            this.selectFileBtn.Location = new System.Drawing.Point(894, 108);
             this.selectFileBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.selectFileBtn.Name = "selectFileBtn";
-            this.selectFileBtn.Size = new System.Drawing.Size(213, 54);
+            this.selectFileBtn.Size = new System.Drawing.Size(230, 54);
             this.selectFileBtn.TabIndex = 16;
             this.selectFileBtn.Text = "Choose File";
             this.selectFileBtn.Click += new System.EventHandler(this.scanBtn_Click);
@@ -193,7 +195,7 @@ namespace Antivirus.UserControls
             this.panel3.Controls.Add(this.label4);
             this.panel3.Location = new System.Drawing.Point(35, 310);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1072, 123);
+            this.panel3.Size = new System.Drawing.Size(1089, 123);
             this.panel3.TabIndex = 23;
             // 
             // label10

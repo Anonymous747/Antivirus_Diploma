@@ -41,7 +41,7 @@ namespace Antivirus.UserControls
         {
             List<Button> buttons = new List<Button>()
             {
-                ScanBtn, //scannerBtn, quarantineBtn, systemBtn, updatesBtn, aboutBtn
+                ScanBtn, QuarantineBtn,//scannerBtn, quarantineBtn, systemBtn, updatesBtn, aboutBtn
             };
 
             //navigationButtons = new NavigationButtons(buttons, btnDefaultColor, btnSelectedtColor);
@@ -99,6 +99,11 @@ namespace Antivirus.UserControls
             //navigationButtons.HighlightButton(scannerBtn);
         }
         #endregion
+
+        private void QuarantineBtn_Click_1(object sender, EventArgs e)
+        {
+            navigationControl.Display(NavigationConstants.kQuarantineScreenIndex);
+        }
     }
 
     static class NavigationConstants {
