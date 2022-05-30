@@ -1,36 +1,46 @@
 ﻿using Antivirus.Model;
+using Antivirus.Navigation;
 using Antivirus.Repository;
 using Antivirus.Source;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Windows.Forms;
-using AntivirusML.Model;
-using MLModelAntivirus;
-using FullAntivirusCheck;
 
 namespace Antivirus.UserControls
 {
     public partial class FileScanningControl : UserControl
     {
+        private Panel _panel;
         private string[] filePaths;
         private static List<InfectedFile> infectedFiles = new List<InfectedFile>();
 
         public static List<InfectedFile> InfectedFiles { get { return infectedFiles; } }
 
-        public FileScanningControl()
+        public FileScanningControl(Panel panel)
         {
+            _panel = panel;
             InitializeComponent();
+            InitializeNavigationControl();
         }
 
-        private void FileScanningControl_Load(object sender, EventArgs e)
+        NavigationControl navigationControl;
+
+        #region Navigation
+
+        private void InitializeNavigationControl()
         {
+            List<UserControl> userControls = new List<UserControl>()
+            { new QuarantineControl(), };
 
+
+            navigationControl = new NavigationControl(userControls, _panel);
+            //navigationControl.Display(FileScanningNavigationConstants.kQuarantineScreenIndex);
         }
+
+        #endregion
 
         private void browseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -38,7 +48,6 @@ namespace Antivirus.UserControls
         }
 
         #region ScanBtn
-
         private void scanBtn_Click(object sender, EventArgs e)
         {
             var mdSignatures = File.ReadAllLines("MD5Base.txt");
@@ -88,7 +97,6 @@ namespace Antivirus.UserControls
             }
         }
 
-
         private void StartProgressBarCalculations(string[] signatures, int checkedFiles)
         {
             int length = signatures.Length;
@@ -137,7 +145,7 @@ namespace Antivirus.UserControls
                     listBox1.Items.Add(filePath);
                 }
             }
-            
+
             ofd.Dispose();
         }
 
@@ -155,10 +163,28 @@ namespace Antivirus.UserControls
         }
         #endregion
 
-        private void label5_Click(object sender, EventArgs e)
-        {
 
+        private void homePageBtn_Click(object sender, EventArgs e)
+        {
+            navigationControl = new NavigationControl(new List<UserControl>()
+            {
+                new FileScanningControl(_panel)
+
+            }
+                , _panel);
+            navigationControl.Display(FileScanningNavigationConstants.kHomeScreenIndex
+                );
         }
 
+        private void QuarantineBtn_Click(object sender, EventArgs e)
+        {
+            navigationControl.Display(FileScanningNavigationConstants.kQuarantineScreenIndex);
+        }
+    }
+
+    static class FileScanningNavigationConstants
+    {
+        public const int kHomeScreenIndex = 0;
+        public const int kQuarantineScreenIndex = 0;
     }
 }

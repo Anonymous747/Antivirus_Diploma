@@ -37,10 +37,9 @@ namespace Antivirus.UserControls
             this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThreatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
-            this.scanBtn = new System.Windows.Forms.Button();
+            this.homePageBtn = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.selectFileBtn = new System.Windows.Forms.Button();
+            this.QuarantineBtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.LastUpdateValue = new System.Windows.Forms.Label();
             this.LastScanValue = new System.Windows.Forms.Label();
@@ -53,6 +52,9 @@ namespace Antivirus.UserControls
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.threatsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel3.SuspendLayout();
@@ -66,10 +68,10 @@ namespace Antivirus.UserControls
             this.listBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(35, 108);
+            this.listBox1.Location = new System.Drawing.Point(285, 108);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(841, 120);
+            this.listBox1.Size = new System.Drawing.Size(591, 120);
             this.listBox1.TabIndex = 20;
             // 
             // progressBar1
@@ -128,17 +130,17 @@ namespace Antivirus.UserControls
             this.label2.TabIndex = 14;
             this.label2.Text = "MD5";
             // 
-            // scanBtn
+            // homePageBtn
             // 
-            this.scanBtn.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.scanBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
-            this.scanBtn.Location = new System.Drawing.Point(894, 180);
-            this.scanBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.scanBtn.Name = "scanBtn";
-            this.scanBtn.Size = new System.Drawing.Size(230, 52);
-            this.scanBtn.TabIndex = 16;
-            this.scanBtn.Text = "Scan";
-            this.scanBtn.Click += new System.EventHandler(this.scanBtn_Click);
+            this.homePageBtn.Font = new System.Drawing.Font("Cooper Black", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.homePageBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
+            this.homePageBtn.Location = new System.Drawing.Point(35, 180);
+            this.homePageBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.homePageBtn.Name = "homePageBtn";
+            this.homePageBtn.Size = new System.Drawing.Size(230, 52);
+            this.homePageBtn.TabIndex = 16;
+            this.homePageBtn.Text = "Home Page";
+            this.homePageBtn.Click += new System.EventHandler(this.homePageBtn_Click);
             // 
             // pictureBox2
             // 
@@ -150,28 +152,17 @@ namespace Antivirus.UserControls
             this.pictureBox2.TabIndex = 22;
             this.pictureBox2.TabStop = false;
             // 
-            // label8
+            // QuarantineBtn
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(118, 33);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(145, 31);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "My Antivirus";
-            // 
-            // selectFileBtn
-            // 
-            this.selectFileBtn.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.selectFileBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
-            this.selectFileBtn.Location = new System.Drawing.Point(894, 108);
-            this.selectFileBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.selectFileBtn.Name = "selectFileBtn";
-            this.selectFileBtn.Size = new System.Drawing.Size(230, 54);
-            this.selectFileBtn.TabIndex = 16;
-            this.selectFileBtn.Text = "Choose File";
-            this.selectFileBtn.Click += new System.EventHandler(this.selectFileBtn_Click);
+            this.QuarantineBtn.Font = new System.Drawing.Font("Cooper Black", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.QuarantineBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
+            this.QuarantineBtn.Location = new System.Drawing.Point(35, 108);
+            this.QuarantineBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.QuarantineBtn.Name = "QuarantineBtn";
+            this.QuarantineBtn.Size = new System.Drawing.Size(230, 54);
+            this.QuarantineBtn.TabIndex = 16;
+            this.QuarantineBtn.Text = "Quarantine";
+            this.QuarantineBtn.Click += new System.EventHandler(this.QuarantineBtn_Click);
             // 
             // panel3
             // 
@@ -307,24 +298,60 @@ namespace Antivirus.UserControls
             this.label4.TabIndex = 0;
             this.label4.Text = "Threat Result: ";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.ForeColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(118, 37);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(299, 31);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "WinDefender Total Security";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Cooper Black", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
+            this.button1.Location = new System.Drawing.Point(894, 108);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(230, 54);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Choose File";
+            this.button1.Click += new System.EventHandler(this.selectFileBtn_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Cooper Black", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
+            this.button2.Location = new System.Drawing.Point(894, 180);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(230, 52);
+            this.button2.TabIndex = 25;
+            this.button2.Text = "Scan";
+            this.button2.Click += new System.EventHandler(this.scanBtn_Click);
+            // 
             // FileScanningControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.threatsGridView);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.selectFileBtn);
-            this.Controls.Add(this.scanBtn);
+            this.Controls.Add(this.QuarantineBtn);
+            this.Controls.Add(this.homePageBtn);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FileScanningControl";
             this.Size = new System.Drawing.Size(1160, 762);
-            this.Load += new System.EventHandler(this.FileScanningControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.threatsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -341,13 +368,12 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.DataGridView threatsGridView;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button scanBtn;
+        private System.Windows.Forms.Button homePageBtn;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn PathColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThreatColumn;
-        private System.Windows.Forms.Button selectFileBtn;
+        private System.Windows.Forms.Button QuarantineBtn;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
@@ -360,5 +386,8 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label LastUpdateValue;
         private System.Windows.Forms.Label LastScanValue;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Antivirus
 {
-    public partial class Form1 : Form
+    public partial class WinDefender : Form
     {
 
         public const int kHomeScreenIndex = 0;
@@ -21,7 +21,7 @@ namespace Antivirus
         Color btnDefaultColor = Color.FromKnownColor(KnownColor.ControlLight);
         Color btnSelectedtColor = Color.FromKnownColor(KnownColor.ControlDark);
 
-        public Form1()
+        public WinDefender()
         {
             InitializeComponent();
             InitializeNavigationControl();
@@ -49,7 +49,7 @@ namespace Antivirus
         private void InitializeNavigationControl()
         {
             List<UserControl> userControls = new List<UserControl>()
-            { new HomeControl(panel2), new FileScanningControl(),
+            { new HomeControl(panel2), new FileScanningControl(panel2),
             /*     new QuarantineControl(), new SystemInformationControl(),
             new UpdatesControl(), new AboutApplicationControl()*/
             };

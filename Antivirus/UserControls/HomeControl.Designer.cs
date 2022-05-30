@@ -96,7 +96,7 @@ namespace Antivirus.UserControls
             this.panel7.Controls.Add(this.pictureBox6);
             this.panel7.Controls.Add(this.label16);
             this.panel7.Controls.Add(this.label17);
-            this.panel7.Location = new System.Drawing.Point(878, 293);
+            this.panel7.Location = new System.Drawing.Point(809, 285);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(214, 311);
             this.panel7.TabIndex = 20;
@@ -169,7 +169,7 @@ namespace Antivirus.UserControls
             this.panel6.Controls.Add(this.pictureBox5);
             this.panel6.Controls.Add(this.label14);
             this.panel6.Controls.Add(this.label15);
-            this.panel6.Location = new System.Drawing.Point(609, 293);
+            this.panel6.Location = new System.Drawing.Point(589, 285);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(214, 311);
             this.panel6.TabIndex = 21;
@@ -242,7 +242,7 @@ namespace Antivirus.UserControls
             this.panel5.Controls.Add(this.pictureBox4);
             this.panel5.Controls.Add(this.label12);
             this.panel5.Controls.Add(this.label13);
-            this.panel5.Location = new System.Drawing.Point(341, 293);
+            this.panel5.Location = new System.Drawing.Point(369, 285);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(214, 311);
             this.panel5.TabIndex = 22;
@@ -336,7 +336,7 @@ namespace Antivirus.UserControls
             this.panel4.Controls.Add(this.pictureBox3);
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.label10);
-            this.panel4.Location = new System.Drawing.Point(70, 293);
+            this.panel4.Location = new System.Drawing.Point(149, 285);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(214, 311);
             this.panel4.TabIndex = 15;
@@ -407,7 +407,7 @@ namespace Antivirus.UserControls
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(113, 23);
+            this.label8.Location = new System.Drawing.Point(118, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(299, 31);
             this.label8.TabIndex = 16;
@@ -572,7 +572,7 @@ namespace Antivirus.UserControls
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Symbol", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(208)))), ((int)(((byte)(220)))));
-            this.label9.Location = new System.Drawing.Point(35, 672);
+            this.label9.Location = new System.Drawing.Point(71, 672);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(116, 25);
             this.label9.TabIndex = 23;

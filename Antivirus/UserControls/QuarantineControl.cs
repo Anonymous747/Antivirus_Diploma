@@ -22,11 +22,11 @@ namespace Antivirus.UserControls
         {
             var virusedFiles = FileScanningControl.InfectedFiles;
             
-            quarantineBox.Items.Clear();
+            /*quarantineBox.Items.Clear();
             foreach (var virusedFile in virusedFiles) 
             {
                 quarantineBox.Items.Add(virusedFile.Path);
-            }
+            }*/
             
         }
 
@@ -37,7 +37,7 @@ namespace Antivirus.UserControls
 
         private void cleanListBtn_Click(object sender, EventArgs e)
         {
-            quarantineBox.Items.Clear();
+            //quarantineBox.Items.Clear();
         }
 
         private void QuarantineControl_Load(object sender, EventArgs e)

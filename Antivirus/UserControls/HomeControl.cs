@@ -21,11 +21,9 @@ namespace Antivirus.UserControls
             _panel = panel;
             InitializeComponent();
             InitializeNavigationControl();
-            InitializeNavigationButton();
         }
 
         NavigationControl navigationControl;
-        NavigationButtons navigationButtons;
 
         Color btnDefaultColor = Color.FromKnownColor(KnownColor.ControlLight);
         Color btnSelectedtColor = Color.FromKnownColor(KnownColor.ControlDark);
@@ -37,21 +35,10 @@ namespace Antivirus.UserControls
 
         #region Navigation
 
-        private void InitializeNavigationButton()
-        {
-            List<Button> buttons = new List<Button>()
-            {
-                ScanBtn, QuarantineBtn,//scannerBtn, quarantineBtn, systemBtn, updatesBtn, aboutBtn
-            };
-
-            //navigationButtons = new NavigationButtons(buttons, btnDefaultColor, btnSelectedtColor);
-            //navigationButtons.HighlightButton(scannerBtn);
-        }
-
         private void InitializeNavigationControl()
         {
             List<UserControl> userControls = new List<UserControl>()
-            { new FileScanningControl(), new QuarantineControl(), new SystemInformationControl(),
+            { new FileScanningControl(_panel), new QuarantineControl(), new SystemInformationControl(),
             new UpdatesControl(), new AboutApplicationControl() };
 
 
@@ -63,47 +50,33 @@ namespace Antivirus.UserControls
 
         #region Buttons
 
-        private void quarantineBtn_Click(object sender, EventArgs e)
+        private void QuarantineBtn_Click_1(object sender, EventArgs e)
         {
             navigationControl.Display(NavigationConstants.kQuarantineScreenIndex);
-            //navigationButtons.HighlightButton(quarantineBtn);
         }
 
-        private void aboutBtn_Click(object sender, EventArgs e)
+        private void AboutBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(NavigationConstants.kAboutAppScreenIndex);
-            //navigationButtons.HighlightButton(aboutBtn);
         }
 
-        private void updatesBtn_Click(object sender, EventArgs e)
+        private void UpdatesBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(NavigationConstants.kUpdatesScreenIndex);
-            //navigationButtons.HighlightButton(updatesBtn);
         }
 
-        private void systemBtn_Click(object sender, EventArgs e)
+        private void SystemBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(NavigationConstants.kSystemInformationScreenIndex);
-            //navigationButtons.HighlightButton(systemBtn);
-        }
-
-        private void scannerBtn_Click(object sender, EventArgs e)
-        {
-            navigationControl.Display(NavigationConstants.kFileScanningScreenIndex);
-            //navigationButtons.HighlightButton(scannerBtn);
         }
 
         private void ScanBtn_Click(object sender, EventArgs e)
         {
             navigationControl.Display(NavigationConstants.kFileScanningScreenIndex);
-            //navigationButtons.HighlightButton(scannerBtn);
         }
         #endregion
 
-        private void QuarantineBtn_Click_1(object sender, EventArgs e)
-        {
-            navigationControl.Display(NavigationConstants.kQuarantineScreenIndex);
-        }
+      
     }
 
     static class NavigationConstants {

@@ -1,5 +1,4 @@
 A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.csproj.AssemblyReference.cache
-A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.Form1.resources
 A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.UserControls.AboutApplicationControl.resources
 A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.UserControls.FileScanningControl.resources
 A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.UserControls.QuarantineControl.resources
@@ -69,3 +68,4 @@ A:\Diploma\Antivirus\bin\Debug\net5.0-windows\FullAntivirusCheck.pdb
 A:\Diploma\Antivirus\bin\Debug\net5.0-windows\EquatableMlModel.zip
 A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.Properties.Resources.resources
 A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.UserControls.HomeControl.resources
+A:\Diploma\Antivirus\obj\Debug\net5.0-windows\Antivirus.WinDefender.resources
