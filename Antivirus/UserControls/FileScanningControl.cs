@@ -50,10 +50,13 @@ namespace Antivirus.UserControls
         #region ScanBtn
         private void scanBtn_Click(object sender, EventArgs e)
         {
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+            timer.Start();
+
             var mdSignatures = File.ReadAllLines("MD5Base.txt");
             var signatures = ConvertSignaturesToStringArray();
 
-            ScanResulLabel.Text = "";
+            ScanResultLabel.Text = "";
             threatsGridView.Rows.Clear();
 
             progressBar1.Maximum = Constants.kMaximumLoaderValue;
@@ -75,26 +78,37 @@ namespace Antivirus.UserControls
 
                     k++;
 
-                    ScanResulLabel.Text = Constants.kInfectedString;
-                    ScanResulLabel.ForeColor = ColorPalette.Red;
+                    ScanResultLabel.Text = Constants.kInfectedString;
+                    ScanResultLabel.ForeColor = ColorPalette.Red;
                 }
-                else if (ScanResulLabel.Text != Constants.kInfectedString)
+                else if (ScanResultLabel.Text != Constants.kInfectedString)
                 {
                     MLFileChecker fileChecker = new MLFileChecker(filePaths);
                     fileChecker.CheckSelectedFiles();
 
 
-                    ScanResulLabel.Text = Constants.kCleanString;
-                    ScanResulLabel.ForeColor = ColorPalette.Green;
+                    ScanResultLabel.Text = Constants.kCleanString;
+                    ScanResultLabel.ForeColor = ColorPalette.Green;
                 }
                 StartProgressBarCalculations(signatures, i + 1);
-            }
 
-            if (infectedFiles.Count > 0)
+                if (ItemScannedNumber.Text != "")
+                {
+                    ItemScannedNumber.Text = (int.Parse(ItemScannedNumber.Text) + 1).ToString();
+                }
+
+                if (infectedFiles.Count > 0)
             {
                 FileArchivator archivator = new FileArchivator(infectedFiles);
                 archivator.ArchivateMalvares();
             }
+
+            timer.Stop();
+            TimeSpan timeSpan = TimeSpan.FromMilliseconds(timer.ElapsedMilliseconds);
+                string time = string.Format("{0:D2}:{1:D2}:{2:D2}:", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+                TimeTakenNumber.Text = time;
+            }
+            timer.Reset();
         }
 
         private void StartProgressBarCalculations(string[] signatures, int checkedFiles)

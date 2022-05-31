@@ -47,7 +47,7 @@ namespace Antivirus.UserControls
             this.label9 = new System.Windows.Forms.Label();
             this.ItemScannedNumber = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.ScanResulLabel = new System.Windows.Forms.Label();
+            this.ScanResultLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -173,7 +173,7 @@ namespace Antivirus.UserControls
             this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.ItemScannedNumber);
             this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.ScanResulLabel);
+            this.panel3.Controls.Add(this.ScanResultLabel);
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.label1);
@@ -245,14 +245,14 @@ namespace Antivirus.UserControls
             // 
             // ScanResulLabel
             // 
-            this.ScanResulLabel.AutoSize = true;
-            this.ScanResulLabel.Font = new System.Drawing.Font("Cooper Black", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScanResulLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
-            this.ScanResulLabel.Location = new System.Drawing.Point(332, 15);
-            this.ScanResulLabel.Name = "ScanResulLabel";
-            this.ScanResulLabel.Size = new System.Drawing.Size(285, 26);
-            this.ScanResulLabel.TabIndex = 4;
-            this.ScanResulLabel.Text = "No Infections Detected!";
+            this.ScanResultLabel.AutoSize = true;
+            this.ScanResultLabel.Font = new System.Drawing.Font("Cooper Black", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ScanResultLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(196)))), ((int)(((byte)(141)))));
+            this.ScanResultLabel.Location = new System.Drawing.Point(332, 15);
+            this.ScanResultLabel.Name = "ScanResulLabel";
+            this.ScanResultLabel.Size = new System.Drawing.Size(285, 26);
+            this.ScanResultLabel.TabIndex = 4;
+            this.ScanResultLabel.Text = "No Infections Detected!";
             // 
             // pictureBox1
             // 
@@ -381,7 +381,7 @@ namespace Antivirus.UserControls
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label ItemScannedNumber;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label ScanResulLabel;
+        private System.Windows.Forms.Label ScanResultLabel;
         private System.Windows.Forms.Label TimeTakenNumber;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label LastUpdateValue;
